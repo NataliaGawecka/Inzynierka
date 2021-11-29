@@ -18,16 +18,17 @@ public class Roads_waypoint : MonoBehaviour
 
     public Waypoint waypoint_nr7;
     public Waypoint waypoint_nr8;
-    //public MapGenerator Map;
 
-    /*  void Start()
-      {
-          for (int i = 0; i < Map.roads.Count; i++)
-          {
-              if (Map.roads[i].GetComponent<Roads_waypoint>().waypoint_nr1 != null && Map.roads[i + 1].GetComponent<Roads_waypoint>().waypoint_nr1 != null)
-                  Map.roads[i].GetComponent<Roads_waypoint>().waypoint_nr1.nextWaypoint = Map.roads[i + 1].GetComponent<Roads_waypoint>().waypoint_nr1;
-          }
-      }
-    */
+    public Waypoint waypoint_nr9;
+    public Waypoint waypoint_nr10;
+
+    public Waypoint waypoint_nr11;
+    public Waypoint waypoint_nr12;
+
+    public Waypoint waypoint_nr13;
+    public Waypoint waypoint_nr14;
+
+    public Waypoint waypoint_nr15;
+    public Waypoint waypoint_nr16;
 
 }
