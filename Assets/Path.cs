@@ -5,325 +5,247 @@ using UnityEngine;
 public class Path : MonoBehaviour
 {
     // Start is called before the first frame update
-    //public MapGenerator Map;
-    public List<List<Roads_waypoint>> AllRoads;
+    public MapGenerator Map;
 
-
-    void Start()
-    {
-        AllRoads = new List<List<Roads_waypoint>>();
-    }
-
-    
     public void WaypointConnect()
     {
         Debug.Log("path");
-        Debug.Log("number of lis" + AllRoads.Count);
+        Debug.Log("number of lis" + Map.roads_list.Count);
+        /*  for (int i = 0; i < Map.roads_list.Count; i++)
+          {
 
-        for (int x = 0; x < AllRoads.Count; x++)
+              if (Map.roads_list[i].tag == "Road_1_line" && Map.roads_list[i+1].tag == "Road_1_line")
+              {
+                  if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null)
+                      Map.roads_list[i].waypoint_nr1.nextWaypoint = Map.roads_list[i + 1].waypoint_nr1;
+              }
+              if (Map.roads_list[i].tag == "Road_1_line" && Map.roads_list[i + 1].tag == "Road_1_line_turn_90")
+              {
+                  if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null)
+                      Map.roads_list[i].waypoint_nr1.nextWaypoint = Map.roads_list[i + 1].waypoint_nr1;
+              }
+              if (Map.roads_list[i].tag == "Road_1_line_turn_90" && Map.roads_list[i + 1].tag == "Road_1_line_90")
+              {
+                  if (Map.roads_list[i].waypoint_nr4 != null && Map.roads_list[i + 1].waypoint_nr1 != null)
+                      Map.roads_list[i].waypoint_nr4.nextWaypoint = Map.roads_list[i + 1].waypoint_nr1;
+              }
+              if (Map.roads_list[i].tag == "Road_1_line_90" && Map.roads_list[i + 1].tag == "Road_1_line_90")
+              {
+                  if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null)
+                      Map.roads_list[i].waypoint_nr1.nextWaypoint = Map.roads_list[i + 1].waypoint_nr1;
+              }
+              if (Map.roads_list[i].tag == "Road_1_line" && Map.roads_list[i + 1].tag == "Road_1_line_turn_180")
+              {
+                  if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null)
+                      Map.roads_list[i].waypoint_nr1.nextWaypoint = Map.roads_list[i + 1].waypoint_nr1;
+              }
+          }
+
+
+          for (int i = Map.roads_list.Count-1; i >0 ; i--)
+          {
+              if (Map.roads_list[i].tag == "Road_1_line" && Map.roads_list[i - 1].tag == "Road_1_line")
+              {
+                  if (Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i - 1].waypoint_nr2 != null)
+                      Map.roads_list[i].waypoint_nr2.nextWaypoint = Map.roads_list[i - 1].waypoint_nr2;
+              }
+              if (Map.roads_list[i].tag == "Road_1_line_turn_90" && Map.roads_list[i - 1].tag == "Road_1_line")
+              {
+                  if (Map.roads_list[i].waypoint_nr8 != null && Map.roads_list[i - 1].waypoint_nr2 != null)
+                  {
+                      Map.roads_list[i].waypoint_nr8.nextWaypoint = Map.roads_list[i - 1].waypoint_nr2;
+                  }
+
+              }
+              if (Map.roads_list[i].tag == "Road_1_line_90" && Map.roads_list[i - 1].tag == "Road_1_line_turn_90")
+              {
+                  if (Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i - 1].waypoint_nr5 != null)
+                  {
+                      Map.roads_list[i].waypoint_nr2.nextWaypoint = Map.roads_list[i - 1].waypoint_nr5;
+                  }
+
+              }
+              if (Map.roads_list[i].tag == "Road_1_line_90" && Map.roads_list[i - 1].tag == "Road_1_line_90")
+              {
+                  if (Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i - 1].waypoint_nr2 != null)
+                      Map.roads_list[i].waypoint_nr2.nextWaypoint = Map.roads_list[i - 1].waypoint_nr2;
+              }
+          }
+        */
+
+        for (int i = 0; i < Map.roads_list.Count; i++)
         {
-            for (int i = 0; i < AllRoads[x].Count; i++)
-            {
-                if (AllRoads[x][i].tag == "Road_1_line" && AllRoads[x][i + 1].tag == "Road_1_line")
+            if(Map.roads_list[i].tag == "Road_1_line" && Map.roads_list[i + 1].tag == "Road_1_line")
+            {   
+                //jeżeli leci lewo->prawo
+                if(Map.roads_list[i].y< Map.roads_list[i + 1].y)
                 {
-                    //jeżeli leci lewo->prawo
-                    if (AllRoads[x][i].y < AllRoads[x][i + 1].y)
+                    if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null && Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i + 1].waypoint_nr2 != null)
                     {
-                        if (AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr2 != null && AllRoads[x][i + 1].waypoint_nr2 != null)
-                        {
-                            AllRoads[x][i].waypoint_nr1.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                            AllRoads[x][i + 1].waypoint_nr2.nextWaypoint = AllRoads[x][i].waypoint_nr2;
-                        }
-
-                    }
-                    //jeżeli leci prawo->lewo
-                    if (AllRoads[x][i].y > AllRoads[x][i + 1].y)
-                    {
-                        if (AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr2 != null && AllRoads[x][i + 1].waypoint_nr2 != null)
-                        {
-                            AllRoads[x][i].waypoint_nr2.nextWaypoint = AllRoads[x][i + 1].waypoint_nr2;
-                            AllRoads[x][i + 1].waypoint_nr1.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-                        }
-
+                        Map.roads_list[i].waypoint_nr1.nextWaypoint = Map.roads_list[i+1].waypoint_nr1;
+                        Map.roads_list[i+1].waypoint_nr2.nextWaypoint = Map.roads_list[i].waypoint_nr2;
                     }
 
                 }
-                if (AllRoads[x][i].tag == "Road_1_line" && AllRoads[x][i + 1].tag == "Road_1_line_turn_90")
+                //jeżeli leci prawo->lewo
+                if (Map.roads_list[i].y > Map.roads_list[i + 1].y)
                 {
-                    //zawsze leci lewo_prawo, wiec nie trzeba sprawdzac w ktora storne to leci
-                    if (AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr2 != null && AllRoads[x][i + 1].waypoint_nr8 != null)
+                    if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null && Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i + 1].waypoint_nr2 != null)
                     {
-                        AllRoads[x][i].waypoint_nr1.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr8.nextWaypoint = AllRoads[x][i].waypoint_nr2;
+                        Map.roads_list[i].waypoint_nr2.nextWaypoint = Map.roads_list[i + 1].waypoint_nr2;
+                        Map.roads_list[i + 1].waypoint_nr1.nextWaypoint = Map.roads_list[i].waypoint_nr1;
                     }
 
                 }
-                if (AllRoads[x][i].tag == "Road_1_line_turn_90" && AllRoads[x][i + 1].tag == "Road_1_line_90")
-                {
-                    //tez nie ma innej mozliwosci musi leciec do gory
-                    if (AllRoads[x][i].waypoint_nr4 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr5 != null && AllRoads[x][i + 1].waypoint_nr2 != null)
-                    {
-                        AllRoads[x][i].waypoint_nr4.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr2.nextWaypoint = AllRoads[x][i].waypoint_nr5;
-                    }
-                }
-                if (AllRoads[x][i].tag == "Road_1_line_90" && AllRoads[x][i + 1].tag == "Road_1_line_90")
-                {
-                    //jezeli leci dół->góra
-                    if (AllRoads[x][i].x > AllRoads[x][i + 1].x)
-                    {
-                        if (AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr2 != null && AllRoads[x][i + 1].waypoint_nr2 != null)
-                        {
-                            AllRoads[x][i].waypoint_nr1.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                            AllRoads[x][i + 1].waypoint_nr2.nextWaypoint = AllRoads[x][i].waypoint_nr2;
-                        }
-                    }
-                    //jeżeli leci góra->dół
-                    if (AllRoads[x][i].x < AllRoads[x][i + 1].x)
-                    {
-                        AllRoads[x][i].waypoint_nr2.nextWaypoint = AllRoads[x][i + 1].waypoint_nr2;
-                        AllRoads[x][i + 1].waypoint_nr1.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-                    }
-                }
-                if (AllRoads[x][i].tag == "Road_1_line_90" && AllRoads[x][i + 1].tag == "Road_1_line_turn_90")
-                {
-                    //nie muszę spradzać bo wiadomo że leci od góry
-
-                    if (AllRoads[x][i].waypoint_nr2 != null && AllRoads[x][i + 1].waypoint_nr2 != null && AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null)
-                    {
-                        AllRoads[x][i].waypoint_nr2.nextWaypoint = AllRoads[x][i + 1].waypoint_nr5;
-                        AllRoads[x][i + 1].waypoint_nr4.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-
-                    }
-                }
-                if (AllRoads[x][i].tag == "Road_1_line_turn_90" && AllRoads[x][i + 1].tag == "Road_1_line")
-                {
-                    //nie musze sprawdzać bo wiadomo ze leci w lewo
-                    if (AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr8 != null && AllRoads[x][i + 1].waypoint_nr2 != null)
-                    {
-                        AllRoads[x][i].waypoint_nr8.nextWaypoint = AllRoads[x][i + 1].waypoint_nr2;
-                        AllRoads[x][i + 1].waypoint_nr1.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-                    }
-                }
-                if (AllRoads[x][i].tag == "Road_1_line" && AllRoads[x][i + 1].tag == "Road_1_line_turn_180")
-                {
-                    if (AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr2 != null && AllRoads[x][i + 1].waypoint_nr8 != null)
-                    {
-                        AllRoads[x][i].waypoint_nr2.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr8.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-                    }
-                }
-                if (AllRoads[x][i].tag == "Road_1_line_turn_180" && AllRoads[x][i + 1].tag == "Road_1_line_90")
-                {
-                    if (AllRoads[x][i].waypoint_nr4 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr5 != null && AllRoads[x][i + 1].waypoint_nr2 != null)
-                    {
-                        AllRoads[x][i].waypoint_nr4.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr2.nextWaypoint = AllRoads[x][i].waypoint_nr5;
-                    }
-                }
-                if (AllRoads[x][i].tag == "Road_1_line_90" && AllRoads[x][i + 1].tag == "Road_1_line_turn")
-                {
-                    if (AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr2 != null && AllRoads[x][i + 1].waypoint_nr8 != null)
-                    {
-                        AllRoads[x][i].waypoint_nr1.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr8.nextWaypoint = AllRoads[x][i].waypoint_nr2;
-                    }
-                }
-                if (AllRoads[x][i].tag == "Road_1_line_turn" && AllRoads[x][i + 1].tag == "Road_1_line")
-                {
-                    if (AllRoads[x][i].waypoint_nr4 != null && AllRoads[x][i + 1].waypoint_nr2 != null && AllRoads[x][i].waypoint_nr5 != null && AllRoads[x][i + 1].waypoint_nr2 != null)
-                    {
-                        AllRoads[x][i].waypoint_nr4.nextWaypoint = AllRoads[x][i + 1].waypoint_nr2;
-                        AllRoads[x][i + 1].waypoint_nr1.nextWaypoint = AllRoads[x][i].waypoint_nr5;
-                    }
-
-                }
-                if (AllRoads[x][i].tag == "Road_1_line" && AllRoads[x][i + 1].tag == "Road_1_line_turn")
-                {
-                    if (AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr5 != null && AllRoads[x][i].waypoint_nr2 != null && AllRoads[x][i + 1].waypoint_nr4 != null)
-                    {
-                        AllRoads[x][i].waypoint_nr1.nextWaypoint = AllRoads[x][i + 1].waypoint_nr5;
-                        AllRoads[x][i + 1].waypoint_nr4.nextWaypoint = AllRoads[x][i].waypoint_nr2;
-                    }
-
-                }
-                if (AllRoads[x][i].tag == "Road_1_line_turn" && AllRoads[x][i + 1].tag == "Road_1_line_90")
-                {
-                    if (AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr8 != null && AllRoads[x][i + 1].waypoint_nr2 != null)
-                    {
-                        AllRoads[x][i].waypoint_nr8.nextWaypoint = AllRoads[x][i + 1].waypoint_nr2;
-                        AllRoads[x][i + 1].waypoint_nr1.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-                    }
-                }
-                if (AllRoads[x][i].tag == "Road_1_line" && AllRoads[x][i + 1].tag == "Road_1_line_turn_270")
-                {
-                    if (AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr4 != null && AllRoads[x][i].waypoint_nr2 != null && AllRoads[x][i + 1].waypoint_nr5 != null)
-                    {
-
-                        AllRoads[x][i].waypoint_nr2.nextWaypoint = AllRoads[x][i + 1].waypoint_nr5;
-                        AllRoads[x][i + 1].waypoint_nr4.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-                    }
-                }
-                if (AllRoads[x][i].tag == "Road_1_line_turn_270" && AllRoads[x][i + 1].tag == "Road_1_line_90")
-                {
-                    if (AllRoads[x][i].waypoint_nr8 != null && AllRoads[x][i + 1].waypoint_nr2 != null && AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null)
-                    {
-
-                        AllRoads[x][i].waypoint_nr8.nextWaypoint = AllRoads[x][i + 1].waypoint_nr2;
-                        AllRoads[x][i + 1].waypoint_nr1.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-                    }
-                }
-                if (AllRoads[x][i].tag == "Road_1_line_90" && AllRoads[x][i + 1].tag == "Road_1_line_turn_270")
-                {
-                    if (AllRoads[x][i].waypoint_nr2 != null && AllRoads[x][i + 1].waypoint_nr8 != null && AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null)
-                    {
-
-                        AllRoads[x][i].waypoint_nr1.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr8.nextWaypoint = AllRoads[x][i].waypoint_nr2;
-                    }
-                }
-                if (AllRoads[x][i].tag == "Road_1_line_turn_270" && AllRoads[x][i + 1].tag == "Road_1_line")
-                {
-                    if (AllRoads[x][i].waypoint_nr4 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr5 != null && AllRoads[x][i + 1].waypoint_nr2 != null)
-                    {
-
-                        AllRoads[x][i].waypoint_nr4.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr2.nextWaypoint = AllRoads[x][i].waypoint_nr5;
-                    }
-                }
-                if(AllRoads[x][i].tag== "Road_1_line" && AllRoads[x][i+1].tag == "circle")
-                {   
-                    //jezeli leci lewo -> prawo
-                    if (AllRoads[x][i].y < AllRoads[x][i + 1].y)
-                    {
-                        AllRoads[x][i].waypoint_nr1.nextWaypoint = AllRoads[x][i + 1].waypoint_nr16;
-                        AllRoads[x][i+1].waypoint_nr15.nextWaypoint = AllRoads[x][i].waypoint_nr2;
-                    }
-                    //prawo_lewo
-                    if (AllRoads[x][i].y > AllRoads[x][i + 1].y)
-                    {
-                        AllRoads[x][i].waypoint_nr2.nextWaypoint = AllRoads[x][i + 1].waypoint_nr11;
-                        AllRoads[x][i + 1].waypoint_nr12.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-                    }
-                }
-                if (AllRoads[x][i].tag == "Road_1_line_90" && AllRoads[x][i + 1].tag == "circle")
-                {
-                    //jezeli leci góra -> dół
-                    if (AllRoads[x][i].x < AllRoads[x][i + 1].x)
-                    {
-                        AllRoads[x][i].waypoint_nr2.nextWaypoint = AllRoads[x][i + 1].waypoint_nr14;
-                        AllRoads[x][i + 1].waypoint_nr13.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-                    }
-                    //dół-> góra
-                    if (AllRoads[x][i].x > AllRoads[x][i + 1].x)
-                    {
-                        AllRoads[x][i].waypoint_nr1.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr10.nextWaypoint = AllRoads[x][i].waypoint_nr2;
-                    }
-                }
-                if (AllRoads[x][i].tag == "circle" && AllRoads[x][i + 1].tag == "Road_1_line")
-                {
-                    //jezeli leci lewo -> prawo
-                    if (AllRoads[x][i].y < AllRoads[x][i + 1].y)
-                    {
-                        AllRoads[x][i].waypoint_nr12.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr2.nextWaypoint = AllRoads[x][i].waypoint_nr11;
-                    }
-                    //prawo_lewo
-                    if (AllRoads[x][i].y > AllRoads[x][i + 1].y)
-                    {
-                        AllRoads[x][i].waypoint_nr15.nextWaypoint = AllRoads[x][i + 1].waypoint_nr2;
-                        AllRoads[x][i + 1].waypoint_nr1.nextWaypoint = AllRoads[x][i].waypoint_nr16;
-                    }
-                }
-                
-                if (AllRoads[x][i].tag == "circle" && AllRoads[x][i + 1].tag == "Road_1_line_90")
-                {
-                    //jezeli leci góra -> dół
-                    if (AllRoads[x][i].x < AllRoads[x][i + 1].x)
-                    {
-                        AllRoads[x][i].waypoint_nr10.nextWaypoint = AllRoads[x][i + 1].waypoint_nr2;
-                        AllRoads[x][i + 1].waypoint_nr1.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-                    }
-                    //dół-> góra
-                    if (AllRoads[x][i].x > AllRoads[x][i + 1].x)
-                    {
-                        AllRoads[x][i].waypoint_nr13.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr2.nextWaypoint = AllRoads[x][i].waypoint_nr14;
-                    }
-                }
-                ////////////////////////
-                if (AllRoads[x][i].tag == "circle" && AllRoads[x][i + 1].tag == "Road_1_line_turn")
-                {
-                    //jezeli leci lewa -> prawo
-                    if (AllRoads[x][i].y < AllRoads[x][i + 1].y)
-                    {
-                        AllRoads[x][i].waypoint_nr12.nextWaypoint = AllRoads[x][i + 1].waypoint_nr5;
-                        AllRoads[x][i + 1].waypoint_nr4.nextWaypoint = AllRoads[x][i].waypoint_nr11;
-                    }
-                    //dół-> góra
-                    if (AllRoads[x][i].x > AllRoads[x][i + 1].x)
-                    {
-                        AllRoads[x][i].waypoint_nr13.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr8.nextWaypoint = AllRoads[x][i].waypoint_nr14;
-                    }
-                }
-                ////////////////////////
-                if (AllRoads[x][i].tag == "circle" && AllRoads[x][i + 1].tag == "Road_1_line_turn_90")
-                {
-                    //jezeli leci lewa -> prawo
-                    if (AllRoads[x][i].y < AllRoads[x][i + 1].y)
-                    {
-                        AllRoads[x][i].waypoint_nr12.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr8.nextWaypoint = AllRoads[x][i].waypoint_nr11;
-                    }
-                    //góra-> dół
-                    if (AllRoads[x][i].x < AllRoads[x][i + 1].x)
-                    {
-                        AllRoads[x][i].waypoint_nr10.nextWaypoint = AllRoads[x][i + 1].waypoint_nr5;
-                        AllRoads[x][i + 1].waypoint_nr4.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-                    }
-                }
-                /////////////////////////////////////
-                if (AllRoads[x][i].tag == "circle" && AllRoads[x][i + 1].tag == "Road_1_line_turn_180")
-                {
-                    //jezeli leci góra -> dół
-                    if (AllRoads[x][i].x < AllRoads[x][i + 1].x)
-                    {
-                        AllRoads[x][i].waypoint_nr10.nextWaypoint = AllRoads[x][i + 1].waypoint_nr5;
-                        AllRoads[x][i + 1].waypoint_nr4.nextWaypoint = AllRoads[x][i].waypoint_nr1;
-                    }
-                    //prawo-> lewo
-                    if (AllRoads[x][i].y > AllRoads[x][i + 1].y)
-                    {
-                        AllRoads[x][i].waypoint_nr15.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr8.nextWaypoint = AllRoads[x][i].waypoint_nr16;
-                    }
-                }
-                /////////////////////////////////////
-                if (AllRoads[x][i].tag == "circle" && AllRoads[x][i + 1].tag == "Road_1_line_turn_270")
-                {
-                    //jezeli leci dół -> góra
-                    if (AllRoads[x][i].x > AllRoads[x][i + 1].x)
-                    {
-                        AllRoads[x][i].waypoint_nr13.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
-                        AllRoads[x][i + 1].waypoint_nr8.nextWaypoint = AllRoads[x][i].waypoint_nr14;
-                    }
-                    //prawo-> lewo
-                    if (AllRoads[x][i].y > AllRoads[x][i + 1].y)
-                    {
-                        AllRoads[x][i].waypoint_nr15.nextWaypoint = AllRoads[x][i + 1].waypoint_nr5;
-                        AllRoads[x][i + 1].waypoint_nr4.nextWaypoint = AllRoads[x][i].waypoint_nr16;
-                    }
-                }
-
-
-
 
             }
+            if (Map.roads_list[i].tag == "Road_1_line" && Map.roads_list[i + 1].tag == "Road_1_line_turn_90")
+            {
+                //zawsze leci lewo_prawo, wiec nie trzeba sprawdzac w ktora storne to leci
+                if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null && Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i + 1].waypoint_nr8 != null)
+                {
+                    Map.roads_list[i].waypoint_nr1.nextWaypoint = Map.roads_list[i + 1].waypoint_nr1;
+                    Map.roads_list[i + 1].waypoint_nr8.nextWaypoint = Map.roads_list[i].waypoint_nr2;
+                }
+
+            }
+            if(Map.roads_list[i].tag == "Road_1_line_turn_90" && Map.roads_list[i + 1].tag== "Road_1_line_90")
+            {
+                //tez nie ma innej mozliwosci musi leciec do gory
+                if (Map.roads_list[i].waypoint_nr4 != null && Map.roads_list[i + 1].waypoint_nr1 != null && Map.roads_list[i].waypoint_nr5 != null && Map.roads_list[i + 1].waypoint_nr2 != null)
+                {
+                    Map.roads_list[i].waypoint_nr4.nextWaypoint= Map.roads_list[i + 1].waypoint_nr1;
+                    Map.roads_list[i + 1].waypoint_nr2.nextWaypoint = Map.roads_list[i].waypoint_nr5;
+                }
+            }
+            if(Map.roads_list[i].tag == "Road_1_line_90" && Map.roads_list[i + 1].tag == "Road_1_line_90")
+            {
+                //jezeli leci dół->góra
+                if (Map.roads_list[i].x > Map.roads_list[i + 1].x)
+                {
+                    if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null && Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i + 1].waypoint_nr2 != null)
+                    {
+                        Map.roads_list[i].waypoint_nr1.nextWaypoint = Map.roads_list[i + 1].waypoint_nr1;
+                        Map.roads_list[i + 1].waypoint_nr2.nextWaypoint = Map.roads_list[i].waypoint_nr2;
+                    }
+                }
+                //jeżeli leci góra->dół
+                if (Map.roads_list[i].x < Map.roads_list[i + 1].x)
+                {
+                    Map.roads_list[i].waypoint_nr2.nextWaypoint = Map.roads_list[i + 1].waypoint_nr2;
+                    Map.roads_list[i + 1].waypoint_nr1.nextWaypoint = Map.roads_list[i].waypoint_nr1;
+                }
+            }
+            if (Map.roads_list[i].tag == "Road_1_line_90" && Map.roads_list[i + 1].tag == "Road_1_line_turn_90")
+            {
+                //nie muszę spradzać bo wiadomo że leci od góry
+
+                if (Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i + 1].waypoint_nr2 != null && Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null)
+                {
+                    Map.roads_list[i].waypoint_nr2.nextWaypoint = Map.roads_list[i + 1].waypoint_nr5;
+                    Map.roads_list[i + 1].waypoint_nr4.nextWaypoint = Map.roads_list[i].waypoint_nr1;
+
+                }
+            }
+            if (Map.roads_list[i].tag == "Road_1_line_turn_90" && Map.roads_list[i + 1].tag == "Road_1_line")
+            {
+                //nie musze sprawdzać bo wiadomo ze leci w lewo
+                if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null && Map.roads_list[i].waypoint_nr8 != null && Map.roads_list[i + 1].waypoint_nr2 != null)
+                {
+                    Map.roads_list[i].waypoint_nr8.nextWaypoint = Map.roads_list[i + 1].waypoint_nr2;
+                    Map.roads_list[i + 1].waypoint_nr1.nextWaypoint = Map.roads_list[i].waypoint_nr1;
+                }
+            }
+            if (Map.roads_list[i].tag == "Road_1_line" && Map.roads_list[i + 1].tag == "Road_1_line_turn_180")
+            {
+                if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null && Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i + 1].waypoint_nr8 != null)
+                {
+                    Map.roads_list[i].waypoint_nr2.nextWaypoint = Map.roads_list[i + 1].waypoint_nr1;
+                    Map.roads_list[i + 1].waypoint_nr8.nextWaypoint = Map.roads_list[i].waypoint_nr1;
+                }
+            }
+            if (Map.roads_list[i].tag == "Road_1_line_turn_180" && Map.roads_list[i + 1].tag == "Road_1_line_90")
+            {
+                if (Map.roads_list[i].waypoint_nr4 != null && Map.roads_list[i + 1].waypoint_nr1 != null && Map.roads_list[i].waypoint_nr5 != null && Map.roads_list[i + 1].waypoint_nr2 != null)
+                {
+                    Map.roads_list[i].waypoint_nr4.nextWaypoint = Map.roads_list[i + 1].waypoint_nr1;
+                    Map.roads_list[i + 1].waypoint_nr2.nextWaypoint = Map.roads_list[i].waypoint_nr5;
+                }
+            }
+            if (Map.roads_list[i].tag == "Road_1_line_90" && Map.roads_list[i + 1].tag == "Road_1_line_turn")
+            {
+                if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null && Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i + 1].waypoint_nr8 != null)
+                {
+                    Map.roads_list[i].waypoint_nr1.nextWaypoint = Map.roads_list[i + 1].waypoint_nr1;
+                    Map.roads_list[i + 1].waypoint_nr8.nextWaypoint = Map.roads_list[i].waypoint_nr2;
+                }
+            }
+            if (Map.roads_list[i].tag == "Road_1_line_turn" &&Map.roads_list[i + 1].tag == "Road_1_line")
+            {
+                if (Map.roads_list[i].waypoint_nr4 != null && Map.roads_list[i + 1].waypoint_nr2 != null && Map.roads_list[i].waypoint_nr5 != null && Map.roads_list[i + 1].waypoint_nr2 != null)
+                {
+                    Map.roads_list[i].waypoint_nr4.nextWaypoint = Map.roads_list[i + 1].waypoint_nr2;
+                    Map.roads_list[i + 1].waypoint_nr1.nextWaypoint = Map.roads_list[i].waypoint_nr5;
+                }
+
+            }
+            if (Map.roads_list[i].tag == "Road_1_line" && Map.roads_list[i + 1].tag == "Road_1_line_turn")
+            {
+                if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr5 != null && Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i + 1].waypoint_nr4 != null)
+                {
+                    Map.roads_list[i].waypoint_nr1.nextWaypoint = Map.roads_list[i + 1].waypoint_nr5;
+                    Map.roads_list[i + 1].waypoint_nr4.nextWaypoint = Map.roads_list[i].waypoint_nr2;
+                }
+
+            }
+            if (Map.roads_list[i].tag == "Road_1_line_turn" && Map.roads_list[i + 1].tag == "Road_1_line_90")
+            {
+                if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null && Map.roads_list[i].waypoint_nr8 != null && Map.roads_list[i + 1].waypoint_nr2 != null)
+                {
+                    Map.roads_list[i].waypoint_nr8.nextWaypoint = Map.roads_list[i + 1].waypoint_nr2;
+                    Map.roads_list[i + 1].waypoint_nr1.nextWaypoint = Map.roads_list[i].waypoint_nr1;
+                }
+            }
+            if (Map.roads_list[i].tag == "Road_1_line" && Map.roads_list[i + 1].tag == "Road_1_line_turn_270")
+            {
+                if (Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr4 != null && Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i + 1].waypoint_nr5 != null)
+                {
+
+                    Map.roads_list[i].waypoint_nr2.nextWaypoint = Map.roads_list[i + 1].waypoint_nr5;
+                    Map.roads_list[i + 1].waypoint_nr4.nextWaypoint = Map.roads_list[i].waypoint_nr1;
+                }
+            }
+            if (Map.roads_list[i].tag == "Road_1_line_turn_270" && Map.roads_list[i + 1].tag == "Road_1_line_90")
+            {
+                if (Map.roads_list[i].waypoint_nr8 != null && Map.roads_list[i + 1].waypoint_nr2 != null && Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null)
+                {
+
+                    Map.roads_list[i].waypoint_nr8.nextWaypoint = Map.roads_list[i + 1].waypoint_nr2;
+                    Map.roads_list[i + 1].waypoint_nr1.nextWaypoint = Map.roads_list[i].waypoint_nr1;
+                }
+            }
+            if (Map.roads_list[i].tag == "Road_1_line_90" && Map.roads_list[i + 1].tag == "Road_1_line_turn_270")
+            {
+                if (Map.roads_list[i].waypoint_nr2 != null && Map.roads_list[i + 1].waypoint_nr8 != null && Map.roads_list[i].waypoint_nr1 != null && Map.roads_list[i + 1].waypoint_nr1 != null)
+                {
+
+                    Map.roads_list[i].waypoint_nr1.nextWaypoint = Map.roads_list[i + 1].waypoint_nr1;
+                    Map.roads_list[i + 1].waypoint_nr8.nextWaypoint = Map.roads_list[i].waypoint_nr2;
+                }
+            }
+            if (Map.roads_list[i].tag == "Road_1_line_turn_270" && Map.roads_list[i + 1].tag == "Road_1_line")
+            {
+                if (Map.roads_list[i].waypoint_nr4 != null && Map.roads_list[i + 1].waypoint_nr1 != null && Map.roads_list[i].waypoint_nr5 != null && Map.roads_list[i + 1].waypoint_nr2 != null)
+                {
+
+                    Map.roads_list[i].waypoint_nr4.nextWaypoint = Map.roads_list[i + 1].waypoint_nr1;
+                    Map.roads_list[i + 1].waypoint_nr2.nextWaypoint = Map.roads_list[i].waypoint_nr5;
+                }
+            }
+
+
         }
 
+
     }
-
-
 }

@@ -13,11 +13,9 @@ public class MapGenerator : MonoBehaviour
     public int[,] MapMatrix;
     public int number_of_intersections = 0;
     public  List<Roads_waypoint> roads_list;
-    public List<Roads_waypoint> roads_list_2;
     public Path path;
-    public int id_1= -1;
-    public int id_2 = -1;
-
+    public List<Roads_waypoint> roads_list_2;
+    public int id = -1;
     public int seed = 23;
 
     enum directions
@@ -34,6 +32,14 @@ public class MapGenerator : MonoBehaviour
         roads_list = new List<Roads_waypoint>();
 
         Random.InitState(seed);
+        //Random.seed = 21;
+        //Random.seed = 25;
+        //Random.seed = 26 ;
+        //Random.seed = 27 ;
+        // Random.seed = 28;
+        //Random.seed=29;?
+        //Random.seed = 33;
+        //Random.seed = 35;
 
         MapMatrix = new int[20, 20];
         FillMatrixWithEmptySquares();
@@ -51,14 +57,19 @@ public class MapGenerator : MonoBehaviour
         {
             FindForFirstPieceConnection(road, new Vector3(x * distance, 0.2f, (y - 1) * distance), x, y - 1, directions.left);
         }
-        if (dir == directions.left)
+        ///
+      /*  
+        Debug.Log("number of lis" + roads_list.Count);
+        for (int i = 0; i < roads_list.Count; i++)
         {
-            FindForFirstPieceConnection(road, new Vector3(x * distance, 0.2f, (y - 1) * distance), x, y + 1, directions.right);
-        }
 
-      
-        path.AllRoads.Add(roads_list);
-        path.AllRoads.Add(roads_list_2);
+            if (roads_list[i].waypoint_nr1 != null && roads_list[i + 1].waypoint_nr1 != null)
+            {
+              //roads_list[i].waypoint_nr1.nextWaypoint = roads_list[i + 1].waypoint_nr1;
+                roads_list[i].gameObject.GetComponent<Roads_waypoint>().waypoint_nr1.nextWaypoint = roads_list[i + 1].gameObject.GetComponent<Roads_waypoint>().waypoint_nr1;
+            }
+        }
+        //*/
         path.WaypointConnect();
     }
 
@@ -111,9 +122,8 @@ public class MapGenerator : MonoBehaviour
             Roads_waypoint r=Instantiate(road, position, road.transform.rotation) as Roads_waypoint;
             r.x = x;
             r.y = y;
-            id_1++;
-            r.id = id_1;
-            id_2++;
+            id++;
+            r.id = id;
             roads_list.Add(r);
             roads_list_2.Add(r);
             dir = (directions)Random.Range(2, 3);
@@ -148,14 +158,16 @@ public class MapGenerator : MonoBehaviour
             Roads_waypoint r=Instantiate(road, position, road.transform.rotation);
             r.x = x;
             r.y = y;
-            id_1++;
-            r.id = id_1;
+            id++;
+            r.id = id;
             roads_list.Add(r);
             return dir;
         }
         return dir;
     }
  
+    
+
     void FillWithRoads(Roads_waypoint road, Vector3 position, int x, int y, directions condition)
     {
         
@@ -232,64 +244,50 @@ public class MapGenerator : MonoBehaviour
         //dolna
        else  if (x == 19 && y < 19 && y > 0 && road == simple_road[2] )
         {
-            if (checkSimpleRoad(x, y, roads_list) == false)
+            Roads_waypoint road_2 = simple_road[Random.Range(4, 5)];
+            if (road_2 == simple_road[4])
             {
-                Roads_waypoint road_2 = simple_road[Random.Range(4, 5)];
-                if (road_2 == simple_road[4])
-                {
-                    MapMatrix[x, y] = 4;
-                    CreateRoad(position, x, y, road_2, roads_list);
-                    Roads_waypoint road_3 = simple_road[1];
-                    dir = directions.left;
-                    FillWithRoads(road_3, new Vector3((x) * distance, 0.2f, (y - 1) * distance), x, y - 1, dir);
-
-                }
-                if (road_2 == simple_road[5])
-                {
-                    MapMatrix[x, y] = 5;
-                    CreateRoad(position, x, y, road_2, roads_list);
-                    Roads_waypoint road_3 = simple_road[1];
-                    dir = directions.right;
-                    FillWithRoads(road_3, new Vector3(x * distance, 0.2f, y + 1 * distance), x, y + 1, dir);
-
-                }
+                MapMatrix[x, y] = 4;
+                CreateRoad(position, x, y, road_2, roads_list);
+                Roads_waypoint road_3 = simple_road[1];
+                dir = directions.left;
+                FillWithRoads(road_3, new Vector3((x) * distance, 0.2f, (y-1) * distance), x , y-1, dir);
+                
             }
-            else if (checkSimpleRoad(x, y, roads_list) == true)
+            if (road_2 == simple_road[5])
             {
-                return;
+                MapMatrix[x, y] = 5;
+                CreateRoad(position, x, y, road_2, roads_list);
+                Roads_waypoint road_3 = simple_road[1];
+                dir = directions.right;
+                FillWithRoads(road_3, new Vector3(x * distance, 0.2f, y+1 * distance), x , y+1, dir);
+             
             }
         }
         //górna
          else if (x == 0 && y < 19 && y > 0 && road == simple_road[2] )
         {
-            if (checkSimpleRoad(x, y, roads_list) == false)
+            int rand = Random.Range(1, 2);
+         
+            if (rand==1)
             {
-                int rand = Random.Range(1, 2);
-
-                if (rand == 1)
-                {
-                    Roads_waypoint road_2 = simple_road[3];
-                    MapMatrix[x, y] = 3;
-                    CreateRoad(position, x, y, road_2, roads_list);
-                    Roads_waypoint road_3 = simple_road[1];
-                    dir = directions.left;
-                    FillWithRoads(road_3, new Vector3((x) * distance, 0.2f, (y - 1) * distance), x, y - 1, dir);
-
-                }
-                if (rand == 2)
-                {
-                    Roads_waypoint road_2 = simple_road[6];
-                    MapMatrix[x, y] = 6;
-                    CreateRoad(position, x, y, road_2, roads_list);
-                    Roads_waypoint road_3 = simple_road[1];
-                    dir = directions.right;
-                    FillWithRoads(road_3, new Vector3(x * distance, 0.2f, y + 1 * distance), x, y + 1, dir);
-
-                }
+                Roads_waypoint road_2 = simple_road[3];
+                MapMatrix[x, y] = 3;
+                CreateRoad(position, x, y, road_2, roads_list);
+                Roads_waypoint road_3 = simple_road[1];
+                dir = directions.left;
+                FillWithRoads(road_3, new Vector3((x) * distance, 0.2f, (y - 1) * distance), x, y - 1, dir);
+                
             }
-            else if (checkSimpleRoad(x, y, roads_list) == true)
+            if (rand==2)
             {
-                return;
+                Roads_waypoint road_2 = simple_road[6];
+                MapMatrix[x, y] = 6;
+                CreateRoad(position, x, y, road_2, roads_list);
+                Roads_waypoint road_3 = simple_road[1];
+                dir = directions.right;
+                FillWithRoads(road_3, new Vector3(x * distance, 0.2f, y + 1 * distance), x, y + 1, dir);
+               
             }
         }
 
@@ -404,7 +402,7 @@ public class MapGenerator : MonoBehaviour
 
        else  if (road == simple_road[1] && condition == directions.right  && y!=19 )
         {
-            if (CheckIfThereIsTurnRoad(road, x, y, roads_list) == true ){
+            if (checkTurnRoad(road, x, y, roads_list) == true ){
                 return;
             }
               else  if (checkSimpleRoad(x, y, roads_list) == false)
@@ -430,8 +428,7 @@ public class MapGenerator : MonoBehaviour
                     else if (MapMatrix[x, y + 1] == 6 && x != 0)
                     {
                         MapMatrix[x, y] = 4;
-                        Roads_waypoint road_2 = simple_road[4];
-                        CreateRoad(position, x, y, road_2, roads_list);
+                        CreateRoad(position, x, y, road, roads_list);
                         FillWithRoads(simple_road[2], new Vector3((x - 1) * distance, 0.2f, y * distance), x - 1, y, directions.up);
                     }
                     else
@@ -488,7 +485,7 @@ public class MapGenerator : MonoBehaviour
             {
 
             // Debug.Log("halo");
-            if (CheckIfThereIsTurnRoad(road, x, y, roads_list) == true)
+            if (checkTurnRoad(road, x, y, roads_list) == true)
             {
                 return;
             }
@@ -499,7 +496,12 @@ public class MapGenerator : MonoBehaviour
                 if (z < 50)
                 {
                     MapMatrix[x, y] = 1;
-                    CreateRoad(position, x, y, road, roads_list);
+                    Roads_waypoint r = Instantiate(road, position, road.transform.rotation);
+                    r.x = x;
+                    r.y = y;
+                    id++;
+                    r.id = id;
+                    roads_list.Add(r);
                     FillWithRoads(road, new Vector3(x * distance, 0.2f, (y - 1) * distance), x, y - 1, condition);
                 }
                 //jezeli idziemy w lewo musimy sprawdzic czy za nami nie ma znowu skrzyzowanie w tym przypadku za nami bedzie to y+1
@@ -546,6 +548,7 @@ public class MapGenerator : MonoBehaviour
                     {
                         MapMatrix[x, y] = 6;
                         Roads_waypoint road_2 = simple_road[6];
+                        Roads_waypoint r = Instantiate(road_2, position, road_2.transform.rotation);
                         CreateRoad(position, x, y, road_2, roads_list);
                         FillWithRoads(simple_road[2], new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, directions.down);
                     }
@@ -575,7 +578,7 @@ public class MapGenerator : MonoBehaviour
         //tutaj tez nie wiem, warunek z x może być nie tak potem
         else if (road == simple_road[2] && condition == directions.up && x != 0 )
         {
-            if (CheckIfThereIsTurnRoad(road, x, y, roads_list) == true)
+            if (checkTurnRoad(road, x, y, roads_list) == true)
             {
                 return;
             }
@@ -665,7 +668,7 @@ public class MapGenerator : MonoBehaviour
 
            else  if (road == simple_road[2] && condition == directions.down &&  x != 19 )
             {
-            if (CheckIfThereIsTurnRoad(road, x, y,roads_list) == true)
+            if (checkTurnRoad(road, x, y,roads_list) == true)
             {
                 return;
             }
@@ -702,6 +705,8 @@ public class MapGenerator : MonoBehaviour
                     else
                     {
                         MapMatrix[x, y] = 2;
+
+                        Roads_waypoint r = Instantiate(road, position, road.transform.rotation);
                         CreateRoad(position, x, y, road, roads_list);
                         FillWithRoads(road, new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, condition);
                     }
@@ -729,6 +734,8 @@ public class MapGenerator : MonoBehaviour
                     else
                     {
                         MapMatrix[x, y] = 2;
+
+                        Roads_waypoint r = Instantiate(road, position, road.transform.rotation);
                         CreateRoad(position, x, y, road, roads_list);
                         FillWithRoads(road, new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, condition);
                     }
@@ -736,6 +743,7 @@ public class MapGenerator : MonoBehaviour
                 else
                 {
                     MapMatrix[x, y] = 2;
+                    Roads_waypoint r = Instantiate(road, position, road.transform.rotation);
                     CreateRoad(position, x, y, road, roads_list);
                     FillWithRoads(road, new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, condition);
                 }
@@ -754,98 +762,15 @@ public class MapGenerator : MonoBehaviour
 
     }
 
-    private void CreateRoad(Vector3 position, int x, int y, Roads_waypoint road_2, List<Roads_waypoint> roadsList)
+    private void CreateRoad(Vector3 position, int x, int y, Roads_waypoint road_2,  List<Roads_waypoint> roads_list)
     {
-        if (roadsList == roads_list)
-        {
-            if (road_2 == simple_road[0] || road_2 == simple_road[1] || road_2 == simple_road[2] || road_2 == simple_road[3] || road_2 == simple_road[4] || road_2 == simple_road[5] || road_2 == simple_road[6])
-            {
-                Roads_waypoint r = Instantiate(road_2, position, road_2.transform.rotation);
-                r.x = x;
-                r.y = y;
-                id_1++;
-                r.id = id_1;
-                roadsList.Add(r);
-            }
-            else if (road_2 == intersection[0] || road_2 == intersection[1] || road_2 == intersection[2] || road_2 == intersection[3] || road_2 == intersection[4] || road_2 == intersection[5])
-            {
-                Roads_waypoint r = Instantiate(road_2, position, road_2.transform.rotation);
-                r.x = x;
-                r.y = y;
-                id_1++;
-                r.id = id_1;
-                Roads_waypoint r_2 = roadsList.Find(item => item.x == x && item.y == y);
-                if (r_2 != null)
-                {
-                    Destroy(roadsList[r_2.id].gameObject);
-                    Debug.Log("id" + r_2.id);
-                    roadsList[r_2.id] = r;
-                    roadsList.Add(r);
-                    if (roads_list_2.Find(item => item.x == x && item.y == y) != null)
-                    {
-                        Roads_waypoint r_3 = roads_list_2.Find(item => item.x == x && item.y == y);
-                        roads_list_2[r_3.id] = r;
-                        
-                    }
-
-                }
-
-
-            }
-        }
-
-        if (roadsList == roads_list_2)
-        {
-            
-            if (road_2 == simple_road[0] || road_2 == simple_road[1] || road_2 == simple_road[2] || road_2 == simple_road[3] || road_2 == simple_road[4] || road_2 == simple_road[5] || road_2 == simple_road[6])
-            {
-                Roads_waypoint r = Instantiate(road_2, position, road_2.transform.rotation);
-                r.x = x;
-                r.y = y;
-                id_2++;
-                r.id = id_2;
-                roadsList.Add(r);
-                Debug.Log("r" + r);
-            }
-            else if (road_2 == intersection[0] || road_2 == intersection[1] || road_2 == intersection[2] || road_2 == intersection[3] || road_2 == intersection[4] || road_2 == intersection[5])
-            {
-                Roads_waypoint r = Instantiate(road_2, position, road_2.transform.rotation);
-                r.x = x;
-                r.y = y;
-                id_2++;
-                r.id = id_2;
-                Roads_waypoint r_2 = roadsList.Find(item => item.x == x && item.y == y);
-                Debug.Log("r_2"+r_2);
-                if (r_2 != null)
-                {
-
-                    Destroy(roadsList[r_2.id].gameObject);
-                    Debug.Log("id from second list" + r_2.id);
-                    roadsList[r_2.id] = r;
-                    roadsList.Add(r);
-                    if (roads_list.Find(item => item.x == x && item.y == y) != null)
-                    {
-                        Roads_waypoint r_3 = roads_list.Find(item => item.x == x && item.y == y);
-                        roads_list[r_3.id] = r;
-
-                    }
-                }
-                if (r_2 == null)
-                { 
-
-                    Roads_waypoint r_3 = roads_list.Find(item => item.x == x && item.y == y);
-                    Destroy(roads_list[r_3.id].gameObject);
-                    Debug.Log("id from another list" + r_3.id);
-                    roads_list[r_3.id] = r;
-                    roadsList.Add(r);
-
-                }
-
-
-            }
-        }
+        Roads_waypoint r = Instantiate(road_2, position, road_2.transform.rotation);
+        r.x = x;
+        r.y = y;
+        id++;
+        r.id = id;
+        roads_list.Add(r);
     }
-
 
     bool checkSimpleRoad(int x, int y, List<Roads_waypoint> roads_list)
     {
@@ -890,7 +815,16 @@ public class MapGenerator : MonoBehaviour
             Roads_waypoint inter = intersection[Random.Range(4, 5)];
             MapMatrix[x, y] = -4;
             Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
-            CreateRoad(position, x, y, inter, roads_list);
+            Roads_waypoint r = Instantiate(inter, position, inter.transform.rotation);
+            r.x = x;
+            r.y = y;
+            id++;
+            r.id = id;
+            Roads_waypoint r_2 = roads_list.Find(item => item.x == x && item.y == y);
+            Destroy(roads_list[r_2.id].gameObject);
+            Debug.Log("id" + r_2.id);
+            roads_list[r_2.id] = r;
+            roads_list.Add(r);
             //  Debug.Log(number_of_intersections);
             return true;
 
@@ -900,7 +834,12 @@ public class MapGenerator : MonoBehaviour
             Roads_waypoint inter = intersection[Random.Range(4, 5)];
             MapMatrix[x, y] = -4;
             Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
-            CreateRoad(position, x, y, inter, roads_list);
+            Roads_waypoint r = Instantiate(inter, position, inter.transform.rotation);
+            r.x = x;
+            r.y = y;
+            id++;
+            r.id = id;
+            roads_list.Add(r);
             //  Debug.Log(number_of_intersections);
             return true;
 
@@ -914,7 +853,7 @@ public class MapGenerator : MonoBehaviour
         return false;
     }
 
-    bool CheckIfThereIsTurnRoad(Roads_waypoint road, int x, int y, List<Roads_waypoint> roads_list)
+    bool checkTurnRoad(Roads_waypoint road, int x, int y, List<Roads_waypoint> roads_list)
     {
 
         if (MapMatrix[x, y] == 3)
@@ -1022,7 +961,7 @@ public class MapGenerator : MonoBehaviour
                 if (road_2 == simple_road[3])
                 {
                     MapMatrix[x, y] = 3;
-                    CreateRoad(position, x, y, road_2, roads_list_2);
+                    Instantiate(road_2, position, road_2.transform.rotation);
                     Roads_waypoint road_3 = simple_road[2];
                     dir = directions.down;
                     FindForFirstPieceConnection(road_3, new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, dir);
@@ -1031,7 +970,7 @@ public class MapGenerator : MonoBehaviour
                 if (road_2 == simple_road[4])
                 {
                     MapMatrix[x, y] = 4;
-                    CreateRoad(position, x, y, road_2, roads_list_2);
+                    Instantiate(road_2, position, road_2.transform.rotation);
 
                     Roads_waypoint road_3 = simple_road[2];
                     dir = directions.up;
@@ -1053,7 +992,7 @@ public class MapGenerator : MonoBehaviour
                 if (road_2 == simple_road[6])
                 {
                     MapMatrix[x, y] = 6;
-                    CreateRoad(position, x, y, road_2, roads_list_2);
+                    Instantiate(road_2, position, road_2.transform.rotation);
                     Roads_waypoint road_3 = simple_road[2];
                     dir = directions.down;
                     FindForFirstPieceConnection(road_3, new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, dir);
@@ -1062,7 +1001,7 @@ public class MapGenerator : MonoBehaviour
                 if (road_2 == simple_road[5])
                 {
                     MapMatrix[x, y] = 5;
-                    CreateRoad(position, x, y, road_2, roads_list_2);
+                    Instantiate(road_2, position, road_2.transform.rotation);
                     Roads_waypoint road_3 = simple_road[2];
                     dir = directions.up;
                     FindForFirstPieceConnection(road_3, new Vector3((x - 1) * distance, 0.2f, y * distance), x - 1, y, dir);
@@ -1084,7 +1023,7 @@ public class MapGenerator : MonoBehaviour
                 if (road_2 == simple_road[4])
                 {
                     MapMatrix[x, y] = 4;
-                    CreateRoad(position, x, y, road_2, roads_list_2);
+                    Instantiate(road_2, position, road_2.transform.rotation);
                     Roads_waypoint road_3 = simple_road[1];
                     dir = directions.left;
                     FindForFirstPieceConnection(road_3, new Vector3((x) * distance, 0.2f, (y - 1) * distance), x, y - 1, dir);
@@ -1093,7 +1032,7 @@ public class MapGenerator : MonoBehaviour
                 if (road_2 == simple_road[5])
                 {
                     MapMatrix[x, y] = 5;
-                    CreateRoad(position, x, y, road_2, roads_list_2);
+                    Instantiate(road_2, position, road_2.transform.rotation);
                     Roads_waypoint road_3 = simple_road[1];
                     dir = directions.right;
                     FindForFirstPieceConnection(road_3, new Vector3(x * distance, 0.2f, y + 1 * distance), x, y + 1, dir);
@@ -1117,7 +1056,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     Roads_waypoint road_2 = simple_road[3];
                     MapMatrix[x, y] = 3;
-                    CreateRoad(position, x, y, road_2, roads_list_2);
+                    Instantiate(road_2, position, road_2.transform.rotation);
                     Roads_waypoint road_3 = simple_road[1];
                     dir = directions.left;
                     FindForFirstPieceConnection(road_3, new Vector3((x) * distance, 0.2f, (y - 1) * distance), x, y - 1, dir);
@@ -1127,7 +1066,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     Roads_waypoint road_2 = simple_road[6];
                     MapMatrix[x, y] = 6;
-                    CreateRoad(position, x, y, road_2, roads_list_2);
+                    Instantiate(road_2, position, road_2.transform.rotation);
                     Roads_waypoint road_3 = simple_road[1];
                     dir = directions.right;
                     FindForFirstPieceConnection(road_3, new Vector3(x * distance, 0.2f, y + 1 * distance), x, y + 1, dir);
@@ -1145,7 +1084,7 @@ public class MapGenerator : MonoBehaviour
         {
             MapMatrix[x, y] = 4;
             Roads_waypoint road_2 = simple_road[4];
-            CreateRoad(position, x, y, road_2, roads_list_2);
+            Instantiate(road_2, position, road_2.transform.rotation);
             Roads_waypoint road_3 = simple_road[1];
             dir = directions.left;
             FindForFirstPieceConnection(road_3, new Vector3((x) * distance, 0.2f, (y - 1) * distance), x, y - 1, dir);
@@ -1156,7 +1095,7 @@ public class MapGenerator : MonoBehaviour
         {
             MapMatrix[x, y] = 4;
             Roads_waypoint road_2 = simple_road[4];
-            CreateRoad(position, x, y, road_2, roads_list_2);
+            Instantiate(road_2, position, road_2.transform.rotation);
             Roads_waypoint road_3 = simple_road[2];
             dir = directions.up;
             FindForFirstPieceConnection(road_3, new Vector3((x - 1) * distance, 0.2f, (y) * distance), x - 1, y, dir);
@@ -1168,7 +1107,7 @@ public class MapGenerator : MonoBehaviour
         {
             MapMatrix[x, y] = 5;
             Roads_waypoint road_2 = simple_road[5];
-            CreateRoad(position, x, y, road_2, roads_list_2);
+            Instantiate(road_2, position, road_2.transform.rotation);
             Roads_waypoint road_3 = simple_road[2];
             dir = directions.up;
             FindForFirstPieceConnection(road_3, new Vector3((x - 1) * distance, 0.2f, y * distance), x - 1, y, dir);
@@ -1179,7 +1118,7 @@ public class MapGenerator : MonoBehaviour
         {
             MapMatrix[x, y] = 5;
             Roads_waypoint road_2 = simple_road[5];
-            CreateRoad(position, x, y, road_2, roads_list_2);
+            Instantiate(road_2, position, road_2.transform.rotation);
             Roads_waypoint road_3 = simple_road[1];
             dir = directions.right;
             FindForFirstPieceConnection(road_3, new Vector3((x) * distance, 0.2f, (y + 1) * distance), x, y + 1, dir);
@@ -1190,7 +1129,7 @@ public class MapGenerator : MonoBehaviour
         {
             MapMatrix[x, y] = 6;
             Roads_waypoint road_2 = simple_road[6];
-            CreateRoad(position, x, y, road_2, roads_list_2);
+            Instantiate(road_2, position, road_2.transform.rotation);
 
             Roads_waypoint road_3 = simple_road[1];
             dir = directions.right;
@@ -1204,7 +1143,7 @@ public class MapGenerator : MonoBehaviour
         {
             MapMatrix[x, y] = 6;
             Roads_waypoint road_2 = simple_road[6];
-            CreateRoad(position, x, y, road_2, roads_list_2);
+            Instantiate(road_2, position, road_2.transform.rotation);
 
             Roads_waypoint road_3 = simple_road[2];
             dir = directions.down;
@@ -1220,7 +1159,7 @@ public class MapGenerator : MonoBehaviour
             Debug.Log("halo");
             MapMatrix[x, y] = 3;
             Roads_waypoint road_2 = simple_road[3];
-             CreateRoad(position, x, y, road_2, roads_list_2);
+            Instantiate(road_2, position, road_2.transform.rotation);
             if (checkSimpleRoad(x + 1, y, roads_list_2) == false)
             {
                 Roads_waypoint road_3 = simple_road[2];
@@ -1242,7 +1181,7 @@ public class MapGenerator : MonoBehaviour
             Debug.Log("halo");
             MapMatrix[x, y] = 3;
             Roads_waypoint road_2 = simple_road[3];
-            CreateRoad(position, x, y, road_2, roads_list_2);
+            Instantiate(road_2, position, road_2.transform.rotation);
 
             Roads_waypoint road_3 = simple_road[1];
             dir = directions.left;
@@ -1254,17 +1193,17 @@ public class MapGenerator : MonoBehaviour
 
         else if (road == simple_road[1] && condition == directions.right && y != 19)
         {
-            if (CheckIfThereIsTurnRoad(road, x, y,roads_list_2) == true)
+            if (checkTurnRoad(road, x, y,roads_list_2) == true)
             {
                 return;
             }
-            else if (CanIMakeEndRoad(road,x, y,condition,roads_list_2) == false)
+            else if (MakeEndRoad(road,x, y,condition) == false)
             {
                 int z = Random.Range(0, 100);
                 if (z < 50)
                 {
                     MapMatrix[x, y] = 1;
-                    CreateRoad(position, x, y, road, roads_list_2);
+                    Instantiate(road, position, road.transform.rotation);
                     FindForFirstPieceConnection(road, new Vector3(x * distance, 0.2f, (y + 1) * distance), x, y + 1, condition);
                 }
                 //else  if (MapMatrix[x, y - 1] != 6 && MapMatrix[x, y - 1] != 5 && MapMatrix[x, y - 1] != 4 && MapMatrix[x, y - 1] != 3 && z > 50 && z < 75 && x != 19)
@@ -1275,20 +1214,20 @@ public class MapGenerator : MonoBehaviour
                     {
                         MapMatrix[x, y] = 3;
                         Roads_waypoint road_2 = simple_road[3];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[2], new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, directions.down);
                     }
                     else if (MapMatrix[x, y + 1] == 6 && x != 0)
                     {
                         MapMatrix[x, y] = 4;
                         Roads_waypoint road_2 = simple_road[4];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[2], new Vector3((x - 1) * distance, 0.2f, y * distance), x - 1, y, directions.up);
                     }
                     else
                     {
                         MapMatrix[x, y] = 1;
-                        CreateRoad(position, x, y, road, roads_list_2);
+                        Instantiate(road, position, road.transform.rotation);
                         FindForFirstPieceConnection(road, new Vector3(x * distance, 0.2f, (y + 1) * distance), x, y + 1, condition);
                     }
 
@@ -1300,20 +1239,20 @@ public class MapGenerator : MonoBehaviour
                     {
                         MapMatrix[x, y] = 4;
                         Roads_waypoint road_2 = simple_road[4];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[2], new Vector3((x - 1) * distance, 0.2f, y * distance), x - 1, y, directions.up);
                     }
                     else if (MapMatrix[x, y + 1] == 5 && x != 19)
                     {
                         MapMatrix[x, y] = 3;
                         Roads_waypoint road_2 = simple_road[3];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[2], new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, directions.down);
                     }
                     else
                     {
                         MapMatrix[x, y] = 1;
-                        CreateRoad(position, x, y, road, roads_list_2);
+                        Instantiate(road, position, road.transform.rotation);
                         FindForFirstPieceConnection(road, new Vector3(x * distance, 0.2f, (y + 1) * distance), x, y + 1, condition);
                     }
                 }
@@ -1337,18 +1276,18 @@ public class MapGenerator : MonoBehaviour
         {
 
             // Debug.Log("halo");
-            if (CheckIfThereIsTurnRoad(road, x, y, roads_list_2) == true)
+            if (checkTurnRoad(road, x, y, roads_list_2) == true)
             {
                 return;
             }
-            if (CanIMakeEndRoad(road, x, y, condition, roads_list_2) == false)
+            if (MakeEndRoad(road, x, y, condition) == false)
             {
 
                 int z = Random.Range(0, 100);
                 if (z < 50)
                 {
                     MapMatrix[x, y] = 1;
-                    CreateRoad(position, x, y, road, roads_list_2);
+                    Instantiate(road, position, road.transform.rotation);
                     FindForFirstPieceConnection(road, new Vector3(x * distance, 0.2f, (y - 1) * distance), x, y - 1, condition);
                 }
                 //jezeli idziemy w lewo musimy sprawdzic czy za nami nie ma znowu skrzyzowanie w tym przypadku za nami bedzie to y+1
@@ -1359,7 +1298,7 @@ public class MapGenerator : MonoBehaviour
                     {
                         MapMatrix[x, y] = 6;
                         Roads_waypoint road_2 = simple_road[6];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[2], new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, directions.down);
                     }
                     else if (MapMatrix[x, y - 1] == 3 && x != 0)
@@ -1367,13 +1306,13 @@ public class MapGenerator : MonoBehaviour
 
                         MapMatrix[x, y] = 5;
                         Roads_waypoint road_2 = simple_road[5];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[2], new Vector3((x - 1) * distance, 0.2f, y * distance), x - 1, y, directions.up);
                     }
                     else
                     {
                         MapMatrix[x, y] = 1;
-                        CreateRoad(position, x, y, road, roads_list_2);
+                        Instantiate(road, position, road.transform.rotation);
                         FindForFirstPieceConnection(road, new Vector3(x * distance, 0.2f, (y - 1) * distance), x, y - 1, condition);
                     }
 
@@ -1388,20 +1327,20 @@ public class MapGenerator : MonoBehaviour
                     {
                         MapMatrix[x, y] = 5;
                         Roads_waypoint road_2 = simple_road[5];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[2], new Vector3((x - 1) * distance, 0.2f, y * distance), x - 1, y, directions.up);
                     }
                     else if (MapMatrix[x, y - 1] == 4 && x != 19)
                     {
                         MapMatrix[x, y] = 6;
                         Roads_waypoint road_2 = simple_road[6];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[2], new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, directions.down);
                     }
                     else
                     {
                         MapMatrix[x, y] = 1;
-                        CreateRoad(position, x, y, road, roads_list_2);
+                        Instantiate(road, position, road.transform.rotation);
                         FindForFirstPieceConnection(road, new Vector3(x * distance, 0.2f, (y - 1) * distance), x, y - 1, condition);
                     }
 
@@ -1409,7 +1348,7 @@ public class MapGenerator : MonoBehaviour
                 else
                 {
                     MapMatrix[x, y] = 1;
-                    CreateRoad(position, x, y, road, roads_list_2);
+                    Instantiate(road, position, road.transform.rotation);
                     FindForFirstPieceConnection(road, new Vector3(x * distance, 0.2f, (y - 1) * distance), x, y - 1, condition);
                 }
             }
@@ -1422,19 +1361,19 @@ public class MapGenerator : MonoBehaviour
         //tutaj tez nie wiem, warunek z x może być nie tak potem
         else if (road == simple_road[2] && condition == directions.up && x != 0)
         {
-            if (CheckIfThereIsTurnRoad(road, x, y, roads_list_2) == true)
+            if (checkTurnRoad(road, x, y, roads_list_2) == true)
             {
                 return;
             }
 
-            if (CanIMakeEndRoad(road, x, y, condition, roads_list_2) == false)
+            if (MakeEndRoad(road, x, y, condition) == false)
             {
                 int z = Random.Range(0, 100);
                 if (z < 50)
                 {
                     MapMatrix[x, y] = 2;
 
-                    CreateRoad(position, x, y, road, roads_list_2);
+                    Instantiate(road, position, road.transform.rotation);
                     FindForFirstPieceConnection(road, new Vector3((x - 1) * distance, 0.2f, y * distance), x - 1, y, condition);
                 }
                 //else if (MapMatrix[x + 1, y] != 6 && MapMatrix[x + 1, y] != 5 && MapMatrix[x + 1, y] != 4 && MapMatrix[x + 1, y] != 3 && z > 50 && z < 75 && y != 19)
@@ -1445,7 +1384,7 @@ public class MapGenerator : MonoBehaviour
                     {
                         MapMatrix[x, y] = 6;
                         Roads_waypoint road_2 = simple_road[6];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[1], new Vector3((x) * distance, 0.2f, (y + 1) * distance), x, y + 1, directions.right);
                     }
                     //tutaj musi być y!=0 żeby nie skręcało w lewo w lewym rogu mapy 
@@ -1453,14 +1392,15 @@ public class MapGenerator : MonoBehaviour
                     {
                         MapMatrix[x, y] = 3;
                         Roads_waypoint road_2 = simple_road[3];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[1], new Vector3((x) * distance, 0.2f, (y - 1) * distance), x, y - 1, directions.left);
 
                     }
                     else
                     {
                         MapMatrix[x, y] = 2;
-                        CreateRoad(position, x, y, road, roads_list_2);
+
+                        Instantiate(road, position, road.transform.rotation);
                         FindForFirstPieceConnection(road, new Vector3((x - 1) * distance, 0.2f, y * distance), x - 1, y, condition);
                     }
 
@@ -1475,21 +1415,21 @@ public class MapGenerator : MonoBehaviour
                     {
                         MapMatrix[x, y] = 3;
                         Roads_waypoint road_2 = simple_road[3];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[1], new Vector3((x) * distance, 0.2f, (y - 1) * distance), x, y - 1, directions.left);
                     }
                     else if (MapMatrix[x - 1, y] == 4 && y != 19)
                     {
                         MapMatrix[x, y] = 6;
                         Roads_waypoint road_2 = simple_road[6];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[1], new Vector3((x) * distance, 0.2f, (y + 1) * distance), x, y + 1, directions.right);
                     }
                     else
                     {
                         MapMatrix[x, y] = 2;
 
-                        CreateRoad(position, x, y, road, roads_list_2);
+                        Instantiate(road, position, road.transform.rotation);
                         FindForFirstPieceConnection(road, new Vector3((x - 1) * distance, 0.2f, y * distance), x - 1, y, condition);
                     }
                 }
@@ -1497,7 +1437,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     MapMatrix[x, y] = 2;
 
-                    CreateRoad(position, x, y, road, roads_list_2);
+                    Instantiate(road, position, road.transform.rotation);
                     FindForFirstPieceConnection(road, new Vector3((x - 1) * distance, 0.2f, y * distance), x - 1, y, condition);
                 }
             }
@@ -1511,11 +1451,11 @@ public class MapGenerator : MonoBehaviour
 
         else if (road == simple_road[2] && condition == directions.down && x != 19)
         {
-            if (CheckIfThereIsTurnRoad(road, x, y, roads_list_2) == true)
+            if (checkTurnRoad(road, x, y, roads_list_2) == true)
             {
                 return;
             }
-            if (CanIMakeEndRoad(road, x, y, condition, roads_list_2) == false)
+            if (MakeEndRoad(road, x, y, condition) == false)
             {
                 int z = Random.Range(0, 100);
                 if (z < 50)
@@ -1523,7 +1463,7 @@ public class MapGenerator : MonoBehaviour
 
                     MapMatrix[x, y] = 2;
 
-                    CreateRoad(position, x, y, road, roads_list_2);
+                    Instantiate(road, position, road.transform.rotation);
                     FindForFirstPieceConnection(road, new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, condition);
                 }
                 // else if (MapMatrix[x - 1, y] != 6 && MapMatrix[x - 1, y] != 5 && MapMatrix[x - 1, y] != 4 && MapMatrix[x - 1, y] != 3 && z > 50 && z < 75 && y != 19)
@@ -1533,7 +1473,7 @@ public class MapGenerator : MonoBehaviour
                     {
                         MapMatrix[x, y] = 5;
                         Roads_waypoint road_2 = simple_road[5];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[1], new Vector3((x) * distance, 0.2f, (y + 1) * distance), x, y + 1, directions.right);
                     }
                     else if (MapMatrix[x + 1, y] == 6 && y != 0)
@@ -1541,7 +1481,7 @@ public class MapGenerator : MonoBehaviour
 
                         MapMatrix[x, y] = 4;
                         Roads_waypoint road_2 = simple_road[4];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[1], new Vector3((x) * distance, 0.2f, (y - 1) * distance), x, y - 1, directions.left);
                     }
 
@@ -1549,7 +1489,7 @@ public class MapGenerator : MonoBehaviour
                     {
                         MapMatrix[x, y] = 2;
 
-                        CreateRoad(position, x, y, road, roads_list_2);
+                        Instantiate(road, position, road.transform.rotation);
                         FindForFirstPieceConnection(road, new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, condition);
                     }
 
@@ -1562,14 +1502,14 @@ public class MapGenerator : MonoBehaviour
                     {
                         MapMatrix[x, y] = 4;
                         Roads_waypoint road_2 = simple_road[4];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[1], new Vector3((x) * distance, 0.2f, (y - 1) * distance), x, y - 1, directions.left);
                     }
                     else if (MapMatrix[x + 1, y] == 3 && y != 19)
                     {
                         MapMatrix[x, y] = 5;
                         Roads_waypoint road_2 = simple_road[5];
-                        CreateRoad(position, x, y, road_2, roads_list_2);
+                        Instantiate(road_2, position, road_2.transform.rotation);
                         FindForFirstPieceConnection(simple_road[1], new Vector3((x) * distance, 0.2f, (y + 1) * distance), x, y + 1, directions.right);
 
                     }
@@ -1577,7 +1517,7 @@ public class MapGenerator : MonoBehaviour
                     {
                         MapMatrix[x, y] = 2;
 
-                        CreateRoad(position, x, y, road, roads_list_2);
+                        Instantiate(road, position, road.transform.rotation);
                         FindForFirstPieceConnection(road, new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, condition);
                     }
                 }
@@ -1585,7 +1525,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     MapMatrix[x, y] = 2;
 
-                    CreateRoad(position, x, y, road, roads_list_2);
+                    Instantiate(road, position, road.transform.rotation);
                     FindForFirstPieceConnection(road, new Vector3((x + 1) * distance, 0.2f, y * distance), x + 1, y, condition);
                 }
             }
@@ -1603,7 +1543,7 @@ public class MapGenerator : MonoBehaviour
     }
 
 
-    bool CanIMakeEndRoad(Roads_waypoint road,int x, int y, directions dir, List<Roads_waypoint> roads_list_2)
+    bool MakeEndRoad(Roads_waypoint road,int x, int y, directions dir)
     {
         //skrzyżownie typu T na granichach
 
@@ -1612,7 +1552,7 @@ public class MapGenerator : MonoBehaviour
             Roads_waypoint inter = intersection[0];
             MapMatrix[x, y] = -1;
             Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
-            CreateRoad(position, x, y, inter, roads_list_2);
+            Instantiate(inter, position, inter.transform.rotation);
             return true;
         }
         if (MapMatrix[x, y] == 1 && x == 19)
@@ -1620,7 +1560,7 @@ public class MapGenerator : MonoBehaviour
             Roads_waypoint inter = intersection[2];
             MapMatrix[x, y] = -2;
             Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
-            CreateRoad(position, x, y, inter, roads_list_2);
+            Instantiate(inter, position, inter.transform.rotation);
             return true;
         }
         if (MapMatrix[x, y] == 2 && y == 0)
@@ -1628,7 +1568,7 @@ public class MapGenerator : MonoBehaviour
             Roads_waypoint inter = intersection[3];
             MapMatrix[x, y] = -3;
             Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
-            CreateRoad(position, x, y, inter, roads_list_2);
+            Instantiate(inter, position, inter.transform.rotation);
             return true;
         }
         if (MapMatrix[x, y] == 2 && y == 19)
@@ -1636,16 +1576,16 @@ public class MapGenerator : MonoBehaviour
             Roads_waypoint inter = intersection[1];
             MapMatrix[x, y] = -1;
             Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
-            CreateRoad(position, x, y, inter, roads_list_2);
+            Instantiate(inter, position, inter.transform.rotation);
             return true;
         }
-
+        //skrzyzowania z 4 rozgalezianiami 
         if (MapMatrix[x, y] == 1 && x < 19 && x > 0 & y < 19 && y > 0 && road==simple_road[2] && dir==directions.up)
         {
             Roads_waypoint inter = intersection[0];
             MapMatrix[x, y] = -1;
             Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
-            CreateRoad(position, x, y, inter, roads_list_2);
+            Instantiate(inter, position, inter.transform.rotation);
             //  Debug.Log(number_of_intersections);
             return true;
 
@@ -1655,7 +1595,7 @@ public class MapGenerator : MonoBehaviour
             Roads_waypoint inter = intersection[2];
             MapMatrix[x, y] = -2;
             Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
-            CreateRoad(position, x, y, inter, roads_list_2);
+            Instantiate(inter, position, inter.transform.rotation);
             //  Debug.Log(number_of_intersections);
             return true;
 
@@ -1665,7 +1605,7 @@ public class MapGenerator : MonoBehaviour
             Roads_waypoint inter = intersection[3];
             MapMatrix[x, y] = -3;
             Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
-            CreateRoad(position, x, y, inter, roads_list_2);
+            Instantiate(inter, position, inter.transform.rotation);
             //  Debug.Log(number_of_intersections);
             return true;
 
@@ -1676,7 +1616,7 @@ public class MapGenerator : MonoBehaviour
             Roads_waypoint inter = intersection[1];
             MapMatrix[x, y] = -1;
             Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
-            CreateRoad(position, x, y, inter, roads_list_2);
+            Instantiate(inter, position, inter.transform.rotation);
             //  Debug.Log(number_of_intersections);
             return true;
 

@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d932ca6af527c14e9ab6d0aeeef1fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextWaypoint: {fileID: 5280649430609432912}
+  nextWaypoint: {fileID: 0}
   link: {fileID: 0}
   link_nr2: {fileID: 0}
 --- !u!1 &730951069038508898
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d932ca6af527c14e9ab6d0aeeef1fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextWaypoint: {fileID: 5276248013090341953}
+  nextWaypoint: {fileID: 0}
   link: {fileID: 0}
   link_nr2: {fileID: 0}
 --- !u!1 &957078581383184568
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d932ca6af527c14e9ab6d0aeeef1fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextWaypoint: {fileID: 1895504864667767249}
+  nextWaypoint: {fileID: 0}
   link: {fileID: 0}
   link_nr2: {fileID: 0}
 --- !u!1 &1200787771500051809
@@ -181,8 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d932ca6af527c14e9ab6d0aeeef1fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextWaypoint: {fileID: 1469266797574908891}
-  link: {fileID: 8216576058637929338}
+  nextWaypoint: {fileID: 0}
+  link: {fileID: 0}
   link_nr2: {fileID: 0}
 --- !u!1 &1353379979250843001
 GameObject:
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d932ca6af527c14e9ab6d0aeeef1fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextWaypoint: {fileID: 1469266797574908891}
+  nextWaypoint: {fileID: 0}
   link: {fileID: 0}
   link_nr2: {fileID: 0}
 --- !u!1 &1711716658819196949
@@ -365,8 +365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d932ca6af527c14e9ab6d0aeeef1fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextWaypoint: {fileID: 2915541651100431605}
-  link: {fileID: 3132460289817639146}
+  nextWaypoint: {fileID: 0}
+  link: {fileID: 0}
   link_nr2: {fileID: 0}
 --- !u!1 &3133723820088446586
 GameObject:
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d932ca6af527c14e9ab6d0aeeef1fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextWaypoint: {fileID: 2915541651100431605}
+  nextWaypoint: {fileID: 0}
   link: {fileID: 0}
   link_nr2: {fileID: 0}
 --- !u!1 &3852858254897875317
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d932ca6af527c14e9ab6d0aeeef1fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextWaypoint: {fileID: 6712309616253716947}
+  nextWaypoint: {fileID: 0}
   link: {fileID: 0}
   link_nr2: {fileID: 0}
 --- !u!1 &4403560128318700882
@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 6277725120749517925}
   m_Layer: 0
   m_Name: Crossroads_1_lines_circ
-  m_TagString: circle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -588,22 +588,14 @@ MonoBehaviour:
   id: 0
   x: 0
   y: 0
-  waypoint_nr1: {fileID: 251405723962161428}
-  waypoint_nr2: {fileID: 1895504864667767249}
-  waypoint_nr3: {fileID: 5134774659839184860}
-  waypoint_nr4: {fileID: 2915541651100431605}
-  waypoint_nr5: {fileID: 6712309616253716947}
-  waypoint_nr6: {fileID: 4583638702933911309}
-  waypoint_nr7: {fileID: 5280649430609432912}
-  waypoint_nr8: {fileID: 1469266797574908891}
-  waypoint_nr9: {fileID: 5276248013090341953}
-  waypoint_nr10: {fileID: 1646943789945866481}
-  waypoint_nr11: {fileID: 9130678548811665649}
-  waypoint_nr12: {fileID: 3132460289817639146}
-  waypoint_nr13: {fileID: 8119859210411314990}
-  waypoint_nr14: {fileID: 3550848327202266436}
-  waypoint_nr15: {fileID: 8216576058637929338}
-  waypoint_nr16: {fileID: 3268081273668563262}
+  waypoint_nr1: {fileID: 0}
+  waypoint_nr2: {fileID: 0}
+  waypoint_nr3: {fileID: 0}
+  waypoint_nr4: {fileID: 0}
+  waypoint_nr5: {fileID: 0}
+  waypoint_nr6: {fileID: 0}
+  waypoint_nr7: {fileID: 0}
+  waypoint_nr8: {fileID: 0}
 --- !u!1 &5053210134256756220
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d932ca6af527c14e9ab6d0aeeef1fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextWaypoint: {fileID: 5134774659839184860}
+  nextWaypoint: {fileID: 0}
   link: {fileID: 0}
   link_nr2: {fileID: 0}
 --- !u!1 &6596879427428238461
@@ -693,7 +685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d932ca6af527c14e9ab6d0aeeef1fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextWaypoint: {fileID: 4583638702933911309}
+  nextWaypoint: {fileID: 0}
   link: {fileID: 0}
   link_nr2: {fileID: 0}
 --- !u!1 &7111108951870847186
@@ -739,8 +731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d932ca6af527c14e9ab6d0aeeef1fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextWaypoint: {fileID: 1895504864667767249}
-  link: {fileID: 1646943789945866481}
+  nextWaypoint: {fileID: 0}
+  link: {fileID: 0}
   link_nr2: {fileID: 0}
 --- !u!1 &7127538735626334075
 GameObject:
@@ -831,8 +823,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d932ca6af527c14e9ab6d0aeeef1fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextWaypoint: {fileID: 4583638702933911309}
-  link: {fileID: 8119859210411314990}
+  nextWaypoint: {fileID: 0}
+  link: {fileID: 0}
   link_nr2: {fileID: 0}
 --- !u!1 &8680086564653485584
 GameObject:

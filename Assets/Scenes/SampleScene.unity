@@ -290,7 +290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 53.3, y: 107, z: 62}
+  m_LocalPosition: {x: 45.1, y: 91.2, z: 45.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -325,6 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed6c1a5afd026cf4b987ead8cce8f0b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Map: {fileID: 1886937692}
 --- !u!4 &1018095338
 Transform:
   m_ObjectHideFlags: 0
@@ -387,11 +388,9 @@ MonoBehaviour:
   mapHeight: 20
   distance: 6
   number_of_intersections: 0
-  roads_list: []
-  roads_list_2: []
+  roads: []
   path: {fileID: 1018095337}
-  id_1: -1
-  id_2: -1
+  id: -1
   seed: 23
 --- !u!4 &1886937693
 Transform:
