@@ -7,11 +7,12 @@ public class Path : MonoBehaviour
     // Start is called before the first frame update
     //public MapGenerator Map;
     public List<List<Roads_waypoint>> AllRoads;
-
+  
 
     void Start()
     {
         AllRoads = new List<List<Roads_waypoint>>();
+       
     }
 
     
@@ -316,9 +317,59 @@ public class Path : MonoBehaviour
                         AllRoads[x][i + 1].waypoint_nr4.nextWaypoint = AllRoads[x][i].waypoint_nr16;
                     }
                 }
-
-
-
+                /////////////cross_road_90 i proste drogi//zaczynamy od prostych drog
+                if(AllRoads[x][i].tag=="Road_1_line" && AllRoads[x][i+1].tag == "crossroad_90")
+                {
+                    //nie trzeba patrzec dwóch stron bo jest tylko jedna możlliwość
+                    AllRoads[x][i].waypoint_nr1.nextWaypoint = AllRoads[x][i + 1].waypoint_nr10;
+                    AllRoads[x][i + 1].waypoint_nr9.nextWaypoint = AllRoads[x][i].waypoint_nr2;
+                }
+                if (AllRoads[x][i].tag == "Road_1_line_90" && AllRoads[x][i+1].tag == "crossroad_90")
+                {
+                    Debug.Log("jestem");
+                    //góra->dół
+                    if(AllRoads[x][i].x < AllRoads[x][i + 1].x)
+                    {
+                        AllRoads[x][i].waypoint_nr2.nextWaypoint = AllRoads[x][i + 1].waypoint_nr5;
+                        AllRoads[x][i + 1].waypoint_nr4.nextWaypoint = AllRoads[x][i].waypoint_nr1;
+                    }
+                    //dół->góra
+                    if (AllRoads[x][i].x > AllRoads[x][i + 1].x)
+                    {
+                        AllRoads[x][i].waypoint_nr1.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
+                        AllRoads[x][i + 1].waypoint_nr8.nextWaypoint = AllRoads[x][i].waypoint_nr2;
+                    }
+                 }
+                /////////////cross_road_90 i proste drogi//zaczynamy od cross_road
+                if (AllRoads[x][i].tag == "crossroad_90" && i!= AllRoads[x].Count-1)
+                {
+                    if (AllRoads[x][i + 1].tag == "Road_1_line")
+                    {
+                        AllRoads[x][i].waypoint_nr9.nextWaypoint = AllRoads[x][i + 1].waypoint_nr2;
+                        AllRoads[x][i + 1].waypoint_nr1.nextWaypoint = AllRoads[x][i].waypoint_nr10;
+                    }
+                }
+                
+                if(AllRoads[x][i].tag == "crossroad_90" && i != AllRoads[x].Count - 1)
+                {
+                    Debug.Log("jestem");
+                    //góra->dół
+                    if (AllRoads[x][i + 1].tag == "Road_1_line_90")
+                    {
+                        if (AllRoads[x][i].x < AllRoads[x][i + 1].x)
+                        {
+                            AllRoads[x][i].waypoint_nr8.nextWaypoint = AllRoads[x][i + 1].waypoint_nr2;
+                            AllRoads[x][i + 1].waypoint_nr1.nextWaypoint = AllRoads[x][i].waypoint_nr1;
+                        }
+                        //dół->góra
+                        if (AllRoads[x][i].x > AllRoads[x][i + 1].x)
+                        {
+                            AllRoads[x][i].waypoint_nr4.nextWaypoint = AllRoads[x][i + 1].waypoint_nr4;
+                            AllRoads[x][i + 1].waypoint_nr2.nextWaypoint = AllRoads[x][i].waypoint_nr5;
+                        }
+                    }
+                }
+                
 
             }
         }

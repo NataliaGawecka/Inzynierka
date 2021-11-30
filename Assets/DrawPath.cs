@@ -689,10 +689,106 @@ public class DrawPath : MonoBehaviour
                         }
                     }
                 }
+                /// cross road i proste drogi -> zaczynając od drogi
+                if (path.AllRoads[x][i].tag == "Road_1_line" && path.AllRoads[x][i + 1].tag == "crossroad_90")
+                {
+                    if (path.AllRoads[x][i].waypoint_nr1 != null && path.AllRoads[x][i].waypoint_nr1.nextWaypoint != null)
+                    {
+                        Gizmos.color = Color.red;
+                        Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr1.transform.position, path.AllRoads[x][i].waypoint_nr1.nextWaypoint.transform.position);
+                    }
+                    if (path.AllRoads[x][i + 1].waypoint_nr9 != null && path.AllRoads[x][i + 1].waypoint_nr9.nextWaypoint != null)
+                    {
+                        Gizmos.color = Color.blue;
+                        Gizmos.DrawLine(path.AllRoads[x][i + 1].waypoint_nr9.transform.position, path.AllRoads[x][i + 1].waypoint_nr9.nextWaypoint.transform.position);
+                    }
+
+                }
+                if (path.AllRoads[x][i].tag == "Road_1_line_90" && path.AllRoads[x][i + 1].tag == "crossroad_90")
+                {
+                    //góra->dół
+                    if (path.AllRoads[x][i].x < path.AllRoads[x][i + 1].x)
+                    {
+                        if (path.AllRoads[x][i].waypoint_nr2 != null && path.AllRoads[x][i].waypoint_nr2.nextWaypoint != null)
+                        {
+                            Gizmos.color = Color.red;
+                            Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr2.transform.position, path.AllRoads[x][i].waypoint_nr2.nextWaypoint.transform.position);
+                        }
+                        if (path.AllRoads[x][i + 1].waypoint_nr4 != null && path.AllRoads[x][i + 1].waypoint_nr4.nextWaypoint != null)
+                        {
+                            Gizmos.color = Color.blue;
+                            Gizmos.DrawLine(path.AllRoads[x][i + 1].waypoint_nr4.transform.position, path.AllRoads[x][i + 1].waypoint_nr4.nextWaypoint.transform.position);
+                        }
+                    }
+                    //dół->góra
+                    if (path.AllRoads[x][i].x >path.AllRoads[x][i + 1].x)
+                    {
+                        if (path.AllRoads[x][i].waypoint_nr1 != null && path.AllRoads[x][i].waypoint_nr1.nextWaypoint != null)
+                        {
+                            Gizmos.color = Color.red;
+                            Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr1.transform.position, path.AllRoads[x][i].waypoint_nr1.nextWaypoint.transform.position);
+                        }
+                        if (path.AllRoads[x][i + 1].waypoint_nr8 != null && path.AllRoads[x][i + 1].waypoint_nr8.nextWaypoint != null)
+                        {
+                            Gizmos.color = Color.blue;
+                            Gizmos.DrawLine(path.AllRoads[x][i + 1].waypoint_nr8.transform.position, path.AllRoads[x][i + 1].waypoint_nr8.nextWaypoint.transform.position);
+                        }
+                    }
+                }
+                /// cross road i proste drogi -> zaczynając od drogi
+
+                if (i != path.AllRoads[x].Count - 1 && path.AllRoads[x][i].tag == "crossroad_90" && path.AllRoads[x][i + 1].tag == "Road_1_line")
+                {
+                    if (path.AllRoads[x][i].waypoint_nr9 != null && path.AllRoads[x][i].waypoint_nr9.nextWaypoint != null)
+                    {
+                        Gizmos.color = Color.red;
+                        Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr9.transform.position, path.AllRoads[x][i].waypoint_nr9.nextWaypoint.transform.position);
+                    }
+                    if (path.AllRoads[x][i + 1].waypoint_nr1 != null && path.AllRoads[x][i + 1].waypoint_nr1.nextWaypoint != null)
+                    {
+                        Gizmos.color = Color.blue;
+                        Gizmos.DrawLine(path.AllRoads[x][i + 1].waypoint_nr1.transform.position, path.AllRoads[x][i + 1].waypoint_nr1.nextWaypoint.transform.position);
+                    }
+
+                }
+              
+                if ( i!= path.AllRoads[x].Count-1 && path.AllRoads[x][i].tag == "crossroad_90" && path.AllRoads[x][i + 1].tag == "Road_1_line_90")
+                {
+                    //góra->dół
+                    if (path.AllRoads[x][i].x < path.AllRoads[x][i + 1].x)
+                    {
+                        if (path.AllRoads[x][i].waypoint_nr8 != null && path.AllRoads[x][i].waypoint_nr8.nextWaypoint != null)
+                        {
+                            Gizmos.color = Color.red;
+                            Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr8.transform.position, path.AllRoads[x][i].waypoint_nr8.nextWaypoint.transform.position);
+                        }
+                        if (path.AllRoads[x][i + 1].waypoint_nr1 != null && path.AllRoads[x][i + 1].waypoint_nr1.nextWaypoint != null)
+                        {
+                            Gizmos.color = Color.blue;
+                            Gizmos.DrawLine(path.AllRoads[x][i + 1].waypoint_nr1.transform.position, path.AllRoads[x][i + 1].waypoint_nr1.nextWaypoint.transform.position);
+                        }
+                    }
+                    //dół->góra
+                    if (path.AllRoads[x][i].x > path.AllRoads[x][i + 1].x)
+                    {
+                        if (path.AllRoads[x][i].waypoint_nr4 != null && path.AllRoads[x][i].waypoint_nr4.nextWaypoint != null)
+                        {
+                            Gizmos.color = Color.red;
+                            Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr4.transform.position, path.AllRoads[x][i].waypoint_nr4.nextWaypoint.transform.position);
+                        }
+                        if (path.AllRoads[x][i + 1].waypoint_nr2 != null && path.AllRoads[x][i + 1].waypoint_nr2.nextWaypoint != null)
+                        {
+                            Gizmos.color = Color.blue;
+                            Gizmos.DrawLine(path.AllRoads[x][i + 1].waypoint_nr2.transform.position, path.AllRoads[x][i + 1].waypoint_nr2.nextWaypoint.transform.position);
+                        }
+                    }
+                }
+              
+
 
             }
 
-            }
+        }
        
     }
    
