@@ -10,6 +10,8 @@ TagManager:
   - Road_1_line_turn_270
   - Road_1_line_90
   - Road_1_line_turn
+  - circle
+  - crossroad_90
   layers:
   - Default
   - TransparentFX

@@ -339,6 +339,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1721390315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1721390317}
+  - component: {fileID: 1721390316}
+  m_Layer: 0
+  m_Name: CarSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1721390316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721390315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459540426eca3264ab9d605a0d929790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: {fileID: 1018095337}
+  car: {fileID: 2154093574634109353, guid: 6239279b2354e6a4e98d47f2d4a4137a, type: 3}
+--- !u!4 &1721390317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721390315}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.084899, y: 2.963244, z: 54.69265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1886937691
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,14 +423,14 @@ MonoBehaviour:
   - {fileID: 2063512737392373008, guid: df2f0881f28a60142a9466b0383aa53e, type: 3}
   intersection:
   - {fileID: 7047005800198211239, guid: dcbce6748ad70674195eb5b4ea558f13, type: 3}
-  - {fileID: 4048256916346845433, guid: 7cc8409ec134807478293d5165468473, type: 3}
+  - {fileID: 1209143779210616161, guid: 2c5f377e8a6b6ab469179ecd75317799, type: 3}
   - {fileID: 5712805825168608102, guid: aa6f442a48149684588f89cc6066d1af, type: 3}
   - {fileID: 8105885004187279351, guid: 900005cfe95383245bd4c674077188c7, type: 3}
   - {fileID: 6277725120749517925, guid: 41531554de1577f419a6c056467182f5, type: 3}
   - {fileID: 6277725120749517925, guid: 41531554de1577f419a6c056467182f5, type: 3}
   mapWidth: 20
   mapHeight: 20
-  distance: 6
+  distance: 5
   number_of_intersections: 0
   roads_list: []
   roads_list_2: []
