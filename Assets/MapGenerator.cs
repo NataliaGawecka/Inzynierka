@@ -856,7 +856,7 @@ public class MapGenerator : MonoBehaviour
         {
             Roads_waypoint inter = intersection[0];
             MapMatrix[x, y] = -1;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list);
             return true;
         }
@@ -864,7 +864,7 @@ public class MapGenerator : MonoBehaviour
         {
             Roads_waypoint inter = intersection[2];
             MapMatrix[x, y] = -2;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list);
             return true;
         }
@@ -872,7 +872,7 @@ public class MapGenerator : MonoBehaviour
         {
             Roads_waypoint inter = intersection[3];
             MapMatrix[x, y] = -3;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list);
             return true;
         }
@@ -880,16 +880,16 @@ public class MapGenerator : MonoBehaviour
         {
             Roads_waypoint inter = intersection[1];
             MapMatrix[x, y] = -1;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list);
             return true;
         }
         //skrzyzowania z 4 rozgalezianiami 
         if (MapMatrix[x, y] == 1 && x < 19 && x > 0 & y < 19 && y > 0 )
         {
-            Roads_waypoint inter = intersection[Random.Range(4, 5)];
+            Roads_waypoint inter = intersection[Random.Range(4, 6)];
             MapMatrix[x, y] = -4;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list);
             //  Debug.Log(number_of_intersections);
             return true;
@@ -897,9 +897,9 @@ public class MapGenerator : MonoBehaviour
         }
         if (MapMatrix[x, y] == 2 && x < 19 && x > 0 & y < 19 && y > 0 )
         {
-            Roads_waypoint inter = intersection[Random.Range(4, 5)];
+            Roads_waypoint inter = intersection[Random.Range(4, 6)];
             MapMatrix[x, y] = -4;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list);
             //  Debug.Log(number_of_intersections);
             return true;
@@ -923,7 +923,7 @@ public class MapGenerator : MonoBehaviour
             {
                 Roads_waypoint inter = intersection[0];
                 MapMatrix[x, y] = -1;
-                Vector3 position = new Vector3(x * distance, 0.6f, y * distance);
+                Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
                 CreateRoad(position, x, y, inter, roads_list);
                 return true;
             }
@@ -931,7 +931,7 @@ public class MapGenerator : MonoBehaviour
             {
                 Roads_waypoint inter = intersection[1];
                 MapMatrix[x, y] = -1;
-                Vector3 position = new Vector3(x * distance, 0.6f, y * distance);
+                Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
                 CreateRoad(position, x, y, inter, roads_list);
                 return true;
             }
@@ -942,7 +942,7 @@ public class MapGenerator : MonoBehaviour
             {
                 Roads_waypoint inter = intersection[2];
                 MapMatrix[x, y] = -2;
-                Vector3 position = new Vector3(x * distance, 0.6f, y * distance);
+                Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
                 CreateRoad(position, x, y, inter, roads_list);
                 return true;
             }
@@ -950,7 +950,7 @@ public class MapGenerator : MonoBehaviour
             {
                 Roads_waypoint inter = intersection[1];
                 MapMatrix[x, y] = -1;
-                Vector3 position = new Vector3(x * distance, 0.6f, y * distance);
+                Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
                 CreateRoad(position, x, y, inter, roads_list);
                 return true;
             }
@@ -961,7 +961,7 @@ public class MapGenerator : MonoBehaviour
             {
                 Roads_waypoint inter = intersection[2];
                 MapMatrix[x, y] = -2;
-                Vector3 position = new Vector3(x * distance, 0.6f, y * distance);
+                Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
                 CreateRoad(position, x, y, inter, roads_list);
                 return true;
             }
@@ -969,7 +969,7 @@ public class MapGenerator : MonoBehaviour
             {
                 Roads_waypoint inter = intersection[3];
                 MapMatrix[x, y] = -3;
-                Vector3 position = new Vector3(x * distance, 0.6f, y * distance);
+                Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
                 CreateRoad(position, x, y, inter, roads_list);
                 return true;
             }
@@ -980,7 +980,7 @@ public class MapGenerator : MonoBehaviour
             {
                 Roads_waypoint inter = intersection[0];
                 MapMatrix[x, y] = -1;
-                Vector3 position = new Vector3(x * distance, 0.6f, y * distance);
+                Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
                 CreateRoad(position, x, y, inter, roads_list);
                 return true;
             }
@@ -988,7 +988,7 @@ public class MapGenerator : MonoBehaviour
             {
                 Roads_waypoint inter = intersection[3];
                 MapMatrix[x, y] = -3;
-                Vector3 position = new Vector3(x * distance, 0.6f, y * distance);
+                Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
                 CreateRoad(position, x, y, inter, roads_list);
                 return true;
             }
@@ -1611,7 +1611,7 @@ public class MapGenerator : MonoBehaviour
         {
             Roads_waypoint inter = intersection[0];
             MapMatrix[x, y] = -1;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list_2);
             return true;
         }
@@ -1619,7 +1619,7 @@ public class MapGenerator : MonoBehaviour
         {
             Roads_waypoint inter = intersection[2];
             MapMatrix[x, y] = -2;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list_2);
             return true;
         }
@@ -1627,7 +1627,7 @@ public class MapGenerator : MonoBehaviour
         {
             Roads_waypoint inter = intersection[3];
             MapMatrix[x, y] = -3;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list_2);
             return true;
         }
@@ -1635,7 +1635,7 @@ public class MapGenerator : MonoBehaviour
         {
             Roads_waypoint inter = intersection[1];
             MapMatrix[x, y] = -1;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list_2);
             return true;
         }
@@ -1644,7 +1644,7 @@ public class MapGenerator : MonoBehaviour
         {
             Roads_waypoint inter = intersection[0];
             MapMatrix[x, y] = -1;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list_2);
             //  Debug.Log(number_of_intersections);
             return true;
@@ -1654,7 +1654,7 @@ public class MapGenerator : MonoBehaviour
         {
             Roads_waypoint inter = intersection[2];
             MapMatrix[x, y] = -2;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list_2);
             //  Debug.Log(number_of_intersections);
             return true;
@@ -1664,7 +1664,7 @@ public class MapGenerator : MonoBehaviour
         {
             Roads_waypoint inter = intersection[3];
             MapMatrix[x, y] = -3;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list_2);
             //  Debug.Log(number_of_intersections);
             return true;
@@ -1675,7 +1675,7 @@ public class MapGenerator : MonoBehaviour
         {
             Roads_waypoint inter = intersection[1];
             MapMatrix[x, y] = -1;
-            Vector3 position = new Vector3(x * distance, 0.4f, y * distance);
+            Vector3 position = new Vector3(x * distance, 0.2f, y * distance);
             CreateRoad(position, x, y, inter, roads_list_2);
             //  Debug.Log(number_of_intersections);
             return true;

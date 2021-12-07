@@ -12,6 +12,14 @@ TagManager:
   - Road_1_line_turn
   - circle
   - crossroad_90
+  - crossroad
+  - Car
+  - crossroad_270
+  - T_Intersection
+  - T_Intersection_Two
+  - crossroad_180
+  - cross
+  - Lights
   layers:
   - Default
   - TransparentFX
