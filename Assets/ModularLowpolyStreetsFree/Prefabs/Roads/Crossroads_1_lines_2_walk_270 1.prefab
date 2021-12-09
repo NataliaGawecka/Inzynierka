@@ -522,7 +522,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5046157869305647437}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.91, y: 0.39, z: 1.89}
+  m_LocalPosition: {x: -3.12, y: 0.39, z: 0.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7087767091596787808}
@@ -539,7 +539,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.83, y: 0.55, z: 3.92}
+  m_Size: {x: 0.83, y: 0.55, z: 5.84}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &363177538441652028
 MonoBehaviour:
@@ -569,7 +569,7 @@ MonoBehaviour:
   t_intersection_status: {fileID: 3755652126100097538}
   t_intersection_status_two: {fileID: 0}
   car_status: 0
-  freeToRideWaypoint: {fileID: 0}
+  freeToRideWaypoint: {fileID: 5012474326287911908}
   WaypointWhereYouCheckJustOneSide: {fileID: 0}
   WaypointWhereYouCheckJustTwoSide: {fileID: 0}
 --- !u!1 &5378532145646061898
@@ -723,7 +723,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5471325542887111017}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.75, y: 0.39, z: -6.9}
+  m_LocalPosition: {x: -1.92, y: 0.36, z: -5.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7087767091596787808}
@@ -740,7 +740,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.7, z: 3.92}
+  m_Size: {x: 0.75, y: 0.7, z: 6.45}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3755652126100097538
 MonoBehaviour:
@@ -968,5 +968,5 @@ MonoBehaviour:
   t_intersection_status_two: {fileID: 363177538441652028}
   car_status: 0
   freeToRideWaypoint: {fileID: 0}
-  WaypointWhereYouCheckJustOneSide: {fileID: 0}
-  WaypointWhereYouCheckJustTwoSide: {fileID: 0}
+  WaypointWhereYouCheckJustOneSide: {fileID: 5790190099316495713}
+  WaypointWhereYouCheckJustTwoSide: {fileID: 4536302280016499233}

@@ -8,8 +8,9 @@ public class SpawnCar : MonoBehaviour
 {
     public Path path;
    public CarEngine car;
-   // public GameObject car;
+    // public GameObject car;
     // Start is called before the first frame update
+    public List<int> PickedRoads;
     void Start()
     {
 
@@ -21,7 +22,7 @@ public class SpawnCar : MonoBehaviour
         yield return new WaitForSeconds(1);
         Debug.Log("list:" + path.AllRoads.Count);
       
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 Roads_waypoint r = PickRoad(0);
                 car.currentNode = r.waypoint_nr1;
@@ -44,7 +45,16 @@ public class SpawnCar : MonoBehaviour
         int i = Random.Range(0, path.AllRoads[x].Count);
         if (path.AllRoads[x][i].tag == "Road_1_line" || path.AllRoads[x][i].tag == "Road_1_line_90")
         {
-            return path.AllRoads[x][i];
+            if (!PickedRoads.Contains(i))
+            {
+                PickedRoads.Add(i);
+                return path.AllRoads[x][i];
+              
+            }
+            else
+            {
+                return PickRoad(x);
+            }
         }
         
         return PickRoad(x);

@@ -279,7 +279,7 @@ public class CarEngine : MonoBehaviour
                 isBraking = false;
             }
         }
-        /*
+        
         else if (other.gameObject.tag == "Roundabout")
         {
             Debug.Log("im in Roundabout");
@@ -292,7 +292,7 @@ public class CarEngine : MonoBehaviour
             {
                 isBraking = true;
             }
-        }*/
+        }
     }
     
 }

@@ -36,7 +36,7 @@ public class MapGenerator : MonoBehaviour
         Random.InitState(seed);
 
         MapMatrix = new int[20, 20];
-        FillMatrixWithEmptySquares();
+      //  FillMatrixWithEmptySquares();
         PrintMatrixAsLog(MapMatrix);
 
         int x = Random.Range(0, 20);

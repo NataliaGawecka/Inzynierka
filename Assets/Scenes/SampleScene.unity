@@ -611,6 +611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: {fileID: 1018095337}
   car: {fileID: 4346851237440733904, guid: 6239279b2354e6a4e98d47f2d4a4137a, type: 3}
+  PickedRoads: 
 --- !u!4 &1721390317
 Transform:
   m_ObjectHideFlags: 0
@@ -671,7 +672,7 @@ MonoBehaviour:
   - {fileID: 1041685567463061128, guid: 566725c8dfb238f419a8e9342ffaab05, type: 3}
   mapWidth: 20
   mapHeight: 20
-  distance: 5
+  distance: 4.8
   number_of_intersections: 0
   roads_list: []
   roads_list_2: []

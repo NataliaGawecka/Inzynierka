@@ -20,6 +20,7 @@ TagManager:
   - crossroad_180
   - cross
   - Lights
+  - Roundabout
   layers:
   - Default
   - TransparentFX

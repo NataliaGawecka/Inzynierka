@@ -271,7 +271,7 @@ MonoBehaviour:
   maxSpeed: 30
   isBraking: 0
   carRenderer: {fileID: 0}
-  sensorLenght: 10
+  sensorLenght: 2
   frontSensorPosition: 5e-11
   frontsideSensorPosition: 0.3
 --- !u!114 &8210102426311367964
