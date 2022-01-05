@@ -10,13 +10,7 @@ public class Lights : MonoBehaviour
     public Intersection_Lights Light_nr4;
 
     public float time = 100.0f;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (time < 25 && time > 0)

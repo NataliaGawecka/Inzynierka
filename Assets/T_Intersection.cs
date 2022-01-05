@@ -11,6 +11,7 @@ public enum Car_status
 
 public class T_Intersection : MonoBehaviour
 {
+   
     public T_Intersection_Status t_intersection_status;
     public T_Intersection_Status t_intersection_status_two;
 
@@ -22,7 +23,7 @@ public class T_Intersection : MonoBehaviour
     // Start is called before the first frame update
   
     // Update is called once per frame
-    void Update()
+ /*   void Update()
     {
         if (t_intersection_status != null && t_intersection_status_two == null)
         {
@@ -38,4 +39,5 @@ public class T_Intersection : MonoBehaviour
             }
         }
     }
+ */
 }

@@ -679,6 +679,9 @@ MonoBehaviour:
   path: {fileID: 1018095337}
   id_1: -1
   id_2: -1
+  first_x: 0
+  first_y: 0
+  first_road: {fileID: 0}
   seed: 23
 --- !u!4 &1886937693
 Transform:

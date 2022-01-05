@@ -27,21 +27,23 @@ public class Path : MonoBehaviour
             {
                 if (AllRoads[x][i].tag == "Road_1_line" && AllRoads[x][i + 1].tag == "Road_1_line")
                 {
-                    //jeżeli leci lewo->prawo
+                    //sprawdzamy kierunek w którym idzie algorytm
                     if (AllRoads[x][i].y < AllRoads[x][i + 1].y)
                     {
                         if (AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr2 != null && AllRoads[x][i + 1].waypoint_nr2 != null)
                         {
+                            //łączymy waypointy
                             AllRoads[x][i].waypoint_nr1.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
                             AllRoads[x][i + 1].waypoint_nr2.nextWaypoint = AllRoads[x][i].waypoint_nr2;
                         }
 
                     }
-                    //jeżeli leci prawo->lewo
+                    //sprawdzamy kierunek w którym idzie algorytm
                     if (AllRoads[x][i].y > AllRoads[x][i + 1].y)
                     {
                         if (AllRoads[x][i].waypoint_nr1 != null && AllRoads[x][i + 1].waypoint_nr1 != null && AllRoads[x][i].waypoint_nr2 != null && AllRoads[x][i + 1].waypoint_nr2 != null)
                         {
+                            //łączymy waypointy
                             AllRoads[x][i].waypoint_nr2.nextWaypoint = AllRoads[x][i + 1].waypoint_nr2;
                             AllRoads[x][i + 1].waypoint_nr1.nextWaypoint = AllRoads[x][i].waypoint_nr1;
                         }

@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSteerAngle: 45
-  currentNode: {fileID: 0}
+  currentWaypoint: {fileID: 0}
   wheelFL: {fileID: 4384652348909394590}
   wheelFR: {fileID: 5677849171764800071}
   wheelRL: {fileID: 4410786666703264200}
@@ -271,9 +271,7 @@ MonoBehaviour:
   maxSpeed: 30
   isBraking: 0
   carRenderer: {fileID: 0}
-  sensorLenght: 2
-  frontSensorPosition: 5e-11
-  frontsideSensorPosition: 0.3
+  rayLenght: 2.5
 --- !u!114 &8210102426311367964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,10 +287,10 @@ MonoBehaviour:
   motorForce: 40
   breakForce: 60
   maxSteerAngle: 45
-  frontLeftWheelCollider: {fileID: 4384652348909394590}
-  frontRightWheelCollider: {fileID: 5677849171764800071}
-  backLeftWheelCollider: {fileID: 4410786666703264200}
-  backRightWheelCollider: {fileID: 584301005520818658}
+  WheelFL: {fileID: 4384652348909394590}
+  WheelFR: {fileID: 5677849171764800071}
+  WheelBL: {fileID: 4410786666703264200}
+  WheelBR: {fileID: 584301005520818658}
   frontLeftWheelTransform: {fileID: 2154093574634071429}
   frontRightWheelTransform: {fileID: 2154093574634071431}
   backLeftWheelTransform: {fileID: 2154093574634071437}

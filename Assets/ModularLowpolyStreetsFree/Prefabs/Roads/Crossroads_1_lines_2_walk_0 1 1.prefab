@@ -537,8 +537,8 @@ MonoBehaviour:
   t_intersection_status_two: {fileID: 8160886487589537574}
   car_status: 0
   freeToRideWaypoint: {fileID: 0}
-  WaypointWhereYouCheckJustOneSide: {fileID: 0}
-  WaypointWhereYouCheckJustTwoSide: {fileID: 0}
+  WaypointWhereYouCheckJustOneSide: {fileID: 3725041169356402313}
+  WaypointWhereYouCheckJustTwoSide: {fileID: 6709462811625548233}
 --- !u!1 &7076915702989159878
 GameObject:
   m_ObjectHideFlags: 0

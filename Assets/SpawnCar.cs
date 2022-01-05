@@ -7,36 +7,35 @@ using Random = UnityEngine.Random;
 public class SpawnCar : MonoBehaviour
 {
     public Path path;
-   public CarEngine car;
+   public CarAI car;
     // public GameObject car;
     // Start is called before the first frame update
     public List<int> PickedRoads;
     void Start()
     {
 
-        StartCoroutine(SpawnOneCarOnEachRode());
+        StartCoroutine(SpawnOneCarOnEachRoade());
     }
 
-     IEnumerator  SpawnOneCarOnEachRode()
+     IEnumerator  SpawnOneCarOnEachRoade()
     {
-        yield return new WaitForSeconds(1);
-        Debug.Log("list:" + path.AllRoads.Count);
-      
-            for (int i = 0; i < 20; i++)
+        yield return new WaitForSeconds(1);     
+          
+            for (int i = 0; i < path.AllRoads[0].Count/2; i++)
             {
                 Roads_waypoint r = PickRoad(0);
-                car.currentNode = r.waypoint_nr1;
+                car.currentWaypoint = r.waypoint_nr1;
                 Debug.Log("drogi:" + r);
                 if (r.tag == "Road_1_line")
                 {
                     Instantiate(car, new Vector3(r.waypoint_nr1.transform.position.x, r.waypoint_nr1.transform.position.y + 0.5f, r.waypoint_nr1.transform.position.z), car.transform.rotation);
                 }
-                else if (r.tag == "Road_1_line_90") { 
-                        Instantiate(car, r.waypoint_nr1.transform.position, Quaternion.AngleAxis(90, Vector3.down));
+                else if (r.tag == "Road_1_line_90")
+                {
+                    Instantiate(car, r.waypoint_nr1.transform.position, Quaternion.AngleAxis(90, Vector3.down));
                 }
             }
         
-     
     }
 
     public Roads_waypoint PickRoad(int x)
