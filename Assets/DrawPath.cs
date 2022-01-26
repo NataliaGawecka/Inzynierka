@@ -2181,7 +2181,7 @@ public class DrawPath : MonoBehaviour
                             Gizmos.color = Color.red;
                             Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr13.transform.position, path.AllRoads[x][i].waypoint_nr13.nextWaypoint.transform.position);
                         }
-                        if (path.AllRoads[x][i + 1].waypoint_nr10 != null && path.AllRoads[x][i + 1].waypoint_nr10.nextWaypoint != null)
+                        if (path.AllRoads[x][i + 1].waypoint_nr2 != null && path.AllRoads[x][i + 1].waypoint_nr2.nextWaypoint != null)
                         {
                             Gizmos.color = Color.blue;
                             Gizmos.DrawLine(path.AllRoads[x][i + 1].waypoint_nr2.transform.position, path.AllRoads[x][i + 1].waypoint_nr2.nextWaypoint.transform.position);
@@ -2445,6 +2445,37 @@ public class DrawPath : MonoBehaviour
                             Gizmos.DrawLine(path.AllRoads[x][i + 1].waypoint_nr13.transform.position, path.AllRoads[x][i + 1].waypoint_nr13.nextWaypoint.transform.position);
                         }
                     }
+                }
+                /// zakrety i zakrety 
+                if(path.AllRoads[x][i].tag == "Road_1_line_turn_90" && path.AllRoads[x][i + 1].tag == "Road_1_line_turn_180")
+                {
+                    if (path.AllRoads[x][i].waypoint_nr8 != null && path.AllRoads[x][i].waypoint_nr8.nextWaypoint != null)
+                    {
+                        Gizmos.color = Color.red;
+                        Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr8.transform.position, path.AllRoads[x][i].waypoint_nr8.nextWaypoint.transform.position);
+                    }
+                    if (path.AllRoads[x][i + 1].waypoint_nr8 != null && path.AllRoads[x][i + 1].waypoint_nr8.nextWaypoint != null)
+                    {
+                        Gizmos.color = Color.blue;
+                        Gizmos.DrawLine(path.AllRoads[x][i + 1].waypoint_nr8.transform.position, path.AllRoads[x][i + 1].waypoint_nr8.nextWaypoint.transform.position);
+                    }
+
+                    Gizmos.color = Color.blue;
+                    if (path.AllRoads[x][i].waypoint_nr1.nextWaypoint != null)
+                        Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr1.transform.position, path.AllRoads[x][i].waypoint_nr1.nextWaypoint.transform.position);
+                    if (path.AllRoads[x][i].waypoint_nr2.nextWaypoint != null)
+                        Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr2.transform.position, path.AllRoads[x][i].waypoint_nr2.nextWaypoint.transform.position);
+                    if (path.AllRoads[x][i].waypoint_nr3.nextWaypoint != null)
+                        Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr3.transform.position, path.AllRoads[x][i].waypoint_nr3.nextWaypoint.transform.position);
+                  
+                    Gizmos.color = Color.red;
+                    if (path.AllRoads[x][i].waypoint_nr5.nextWaypoint != null)
+                        Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr5.transform.position, path.AllRoads[x][i].waypoint_nr5.nextWaypoint.transform.position);
+                    if (path.AllRoads[x][i].waypoint_nr6.nextWaypoint != null)
+                        Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr6.transform.position, path.AllRoads[x][i].waypoint_nr6.nextWaypoint.transform.position);
+                    if (path.AllRoads[x][i].waypoint_nr7.nextWaypoint != null)
+                        Gizmos.DrawLine(path.AllRoads[x][i].waypoint_nr7.transform.position, path.AllRoads[x][i].waypoint_nr7.nextWaypoint.transform.position);
+                   
                 }
             }
 

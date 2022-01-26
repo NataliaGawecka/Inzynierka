@@ -9,7 +9,7 @@ public class CarAI : MonoBehaviour
 
     public float maxSteerAngle = 45f;
     public Waypoint currentWaypoint;
-
+    public float dist;
     public WheelCollider wheelFL;
     public WheelCollider wheelFR;
     public WheelCollider wheelRL;
@@ -62,8 +62,8 @@ public class CarAI : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayLenght))
         {
-             Debug.DrawLine(transform.position, hit.point);
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            // Debug.DrawLine(transform.position, hit.point);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             if (hit.collider.gameObject.CompareTag("Car"))
             {
                 //Debug.Log("stop because of car");
@@ -280,14 +280,35 @@ public class CarAI : MonoBehaviour
 
         else if (other.gameObject.tag == "Roundabout")
         {
-           
+            /*
+             Roundabout roundabout = other.gameObject.GetComponent<Roundabout>();
+             Roads_waypoint element = other.gameObject.GetComponentInParent(typeof(Roads_waypoint)) as Roads_waypoint;
+             Debug.Log("element" + element.transform.position);
+             Vector3 other_position =  transform.position - element.transform.position;
+             //Debug.Log("rondo" + Vector3.Dot(other_position, transform.forward));
+             if (Vector3.Dot(transform.TransformDirection(Vector3.forward),other_position) > 0)
+             {
+                 Debug.Log("im in Roundabout");
+                 if (roundabout.car_state == Roundabout_car_status.GO)
+                 {
+                     isBraking = false;
+                 }
+                 else if (roundabout.car_state == Roundabout_car_status.STOP)
+                 {
+                     isBraking = true;
+                 }
+             }
+             else if (Vector3.Dot(other_position, transform.forward) < 0)
+             {
+                 Debug.Log("rondo opuszczam");
+                 isBraking = false;
+             }
+            */
             Roundabout roundabout = other.gameObject.GetComponent<Roundabout>();
-         //   Roads_waypoint element = other.gameObject.GetComponentInParent(typeof(Roads_waypoint)) as Roads_waypoint;
-           // Debug.Log("element" + element.transform.position);
-            //Vector3 other_position =  transform.position - element.transform.position;
-            //Debug.Log("rondo" + Vector3.Dot(other_position, transform.forward));
-            //if (Vector3.Dot(transform.TransformDirection(Vector3.forward),other_position) > 0)
-            //{
+            Roads_waypoint element = other.gameObject.GetComponentInParent(typeof(Roads_waypoint)) as Roads_waypoint;
+            float DistTemp = Vector3.Distance(element.transform.position, transform.position);
+            if (DistTemp < dist)
+            {
                 Debug.Log("im in Roundabout");
                 if (roundabout.car_state == Roundabout_car_status.GO)
                 {
@@ -297,12 +318,14 @@ public class CarAI : MonoBehaviour
                 {
                     isBraking = true;
                 }
-            /*}
-            else if (Vector3.Dot(other_position, transform.forward) < 0)
+                dist = DistTemp;
+            }
+            else if (DistTemp > dist)
             {
-                Debug.Log("rondo opuszczam");
+                Debug.Log("Im leaving");
+                dist = DistTemp;
                 isBraking = false;
-            }*/
+            }
         }
     }
     

@@ -260,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSteerAngle: 45
   currentWaypoint: {fileID: 0}
+  dist: 0
   wheelFL: {fileID: 4384652348909394590}
   wheelFR: {fileID: 5677849171764800071}
   wheelRL: {fileID: 4410786666703264200}
@@ -271,7 +272,7 @@ MonoBehaviour:
   maxSpeed: 30
   isBraking: 0
   carRenderer: {fileID: 0}
-  rayLenght: 2.5
+  rayLenght: 1.5
 --- !u!114 &8210102426311367964
 MonoBehaviour:
   m_ObjectHideFlags: 0

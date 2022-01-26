@@ -419,7 +419,7 @@ public class Path : MonoBehaviour
                 
                 if(AllRoads[x][i].tag == "crossroad_90" && i != AllRoads[x].Count - 1)
                 {
-                    Debug.Log("jestem");
+                   
                     //góra->dół
                     if (AllRoads[x][i + 1].tag == "Road_1_line_90")
                     {
@@ -431,7 +431,7 @@ public class Path : MonoBehaviour
                         //dół->góra
                         if (AllRoads[x][i].x > AllRoads[x][i + 1].x)
                         {
-                            AllRoads[x][i].waypoint_nr4.nextWaypoint = AllRoads[x][i + 1].waypoint_nr4;
+                            AllRoads[x][i].waypoint_nr4.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
                             AllRoads[x][i + 1].waypoint_nr2.nextWaypoint = AllRoads[x][i].waypoint_nr5;
                         }
                     }
@@ -1184,6 +1184,12 @@ public class Path : MonoBehaviour
                         AllRoads[x][i].waypoint_nr4.nextWaypoint = AllRoads[x][i + 1].waypoint_nr16;
                         AllRoads[x][i + 1].waypoint_nr15.nextWaypoint = AllRoads[x][i].waypoint_nr5;
                     }
+                }
+                /// zakrety i zakrert
+                if(AllRoads[x][i].tag == "Road_1_line_turn_90" && AllRoads[x][i + 1].tag == "Road_1_line_turn_180")
+                {
+                    AllRoads[x][i].waypoint_nr8.nextWaypoint = AllRoads[x][i + 1].waypoint_nr1;
+                    AllRoads[x][i + 1].waypoint_nr8.nextWaypoint = AllRoads[x][i].waypoint_nr1;
                 }
             }
         }
